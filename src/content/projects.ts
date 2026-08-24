@@ -17,7 +17,7 @@ export const projects: Project[] = [
       es: "Empresa de insumos dentales",
       en: "Dental supplies company",
     },
-    period: "2025 — 2026",
+    period: "2025",
     role: {
       es: "Backend completo, más gran parte del frontend junto a un compañero",
       en: "Full backend, plus much of the frontend alongside a teammate",
@@ -69,6 +69,11 @@ export const projects: Project[] = [
         href: "https://github.com/JuanPabloAnteSuarez03/unidental-frontend",
         label: { es: "Frontend", en: "Frontend" },
       },
+      {
+        kind: "docs",
+        href: "https://unidental-backend.onrender.com/swagger/",
+        label: { es: "Swagger", en: "Swagger" },
+      },
     ],
     media: {},
     preview: { mode: "gallery" },
@@ -84,19 +89,23 @@ export const projects: Project[] = [
       problem: {
         es: [
           "Llevar inventario con vencimientos por lote, en dos sedes, sin un sistema que lo modele, obliga a decidir de memoria qué lote despachar. El costo aparece tarde y en forma de producto vencido.",
+          "El inventario vivía antes en hojas de cálculo de Google Sheets, sin relación real entre productos, lotes y sedes.",
         ],
         en: [
           "Tracking batch-level expiry across two locations without a system that models it forces staff to decide from memory which batch to dispatch. The cost shows up late, as expired product.",
+          "Inventory previously lived in Google Sheets spreadsheets, with no real relational structure between products, batches and locations.",
         ],
       },
       solution: {
         es: [
           "Construí el backend completo en Django y DRF: catálogo con SKU y lotes, inventario por sede con actualización automática de stock, ventas y devoluciones, compras y proveedores, cuentas por cobrar y pagar, entregas y manejo de caja.",
           "El frontend en React lo implementamos en gran parte junto a un compañero, sobre la API que ya había definido.",
+          "Para migrar los datos reales escribí scripts que leían las hojas de Google Sheets del cliente y poblaban la base de datos nueva.",
         ],
         en: [
           "I built the entire backend in Django and DRF: catalog with SKUs and batches, per-location inventory with automatic stock updates, sales and returns, purchases and suppliers, accounts receivable and payable, deliveries and cash management.",
           "The React frontend we largely implemented together with a teammate, on top of the API I had already defined.",
+          "To migrate the real data, I wrote scripts that read the client's Google Sheets and populated the new database.",
         ],
       },
       decisions: [
@@ -132,20 +141,17 @@ export const projects: Project[] = [
       results: {
         es: [
           "El sistema está desplegado: backend en Render, frontend en Vercel, con documentación interactiva de la API en Swagger y Redoc.",
+          "Hoy tiene 1.914 productos activos en el catálogo, repartidos en dos sedes.",
         ],
         en: [
           "The system is deployed: backend on Render, frontend on Vercel, with interactive API documentation in Swagger and Redoc.",
+          "It currently holds 1,914 active products in the catalog, across two locations.",
         ],
       },
     },
     pending: [
-      "¿Cuántos SKU / sedes / transacciones diarias maneja?",
-      "¿Cómo llevaban el inventario antes — Excel, papel?",
-      "¿Está en uso diario en producción hoy?",
       "Capturas autenticadas: inventario, venta con selección FIFO, alertas de vencimiento, comparación de proveedores, cierre de caja",
-      "URL del Swagger desplegado en Render",
-      "¿Se puede sembrar un usuario demo de solo lectura?",
-      "Fechas exactas de inicio y fin",
+      "Usuario demo de solo lectura (NO usar admin123/UnidentalAdmin2024 — son credenciales de admin real, no se publican). Crear un usuario nuevo con permisos mínimos para el portafolio.",
     ],
   },
 
@@ -153,10 +159,10 @@ export const projects: Project[] = [
     slug: "presupuestos",
     name: "Presupuestos de Obra",
     client: {
-      es: "Cliente particular — trabajo de posgrado",
-      en: "Private client — postgraduate work",
+      es: "Paula Cadena — trabajo de posgrado, Universidad del Valle",
+      en: "Paula Cadena — postgraduate work, Universidad del Valle",
     },
-    period: "2025",
+    period: "Febrero 2025 — Febrero 2026",
     role: {
       es: "Desarrollo completo, construido de forma iterativa con la clienta",
       en: "Full development, built iteratively with the client",
@@ -172,12 +178,14 @@ export const projects: Project[] = [
     highlights: {
       es: [
         "Extracción de tablas desde el PDF oficial del decreto",
+        "Visor 3D de modelos BIM (IFC) optimizado para hardware modesto",
         "Arquitectura MVC: modelos, vistas y controladores separados",
         "Modelado relacional de análisis unitarios, recursos y profesionales",
         "Exportación de presupuestos a Excel con formato definido",
       ],
       en: [
         "Table extraction from the decree's official PDF",
+        "3D BIM model (IFC) viewer optimized for modest hardware",
         "MVC architecture: separate models, views and controllers",
         "Relational modeling of unit analyses, resources and professionals",
         "Budget export to Excel in a defined format",
@@ -193,6 +201,8 @@ export const projects: Project[] = [
       { name: "pdfminer.six", group: "data" },
       { name: "PyPDF2", group: "data" },
       { name: "openpyxl", group: "data" },
+      { name: "ifcopenshell", group: "data" },
+      { name: "PyVista / VTK", group: "frontend" },
     ],
     links: [
       {
@@ -211,11 +221,11 @@ export const projects: Project[] = [
       context: {
         es: [
           "En Colombia, los presupuestos de obra pública se construyen sobre análisis de precios unitarios oficiales. Para la Gobernación del Valle esos precios están fijados en el Decreto 1276 de 2021 — publicado como un PDF de cientos de páginas de tablas.",
-          "Este proyecto fue el trabajo de grado de posgrado de una clienta, desarrollado a lo largo de aproximadamente un año como trabajo remunerado.",
+          "Este proyecto fue el trabajo de grado de posgrado de una clienta, desarrollado a lo largo de aproximadamente un año como trabajo remunerado. Le ofrecí construirlo como aplicación web, pero el requerimiento de su tesis, definido por su director, era una aplicación de escritorio.",
         ],
         en: [
           "In Colombia, public works budgets are built on official unit-price analyses. For the Valle regional government those prices are set in Decree 1276 of 2021 — published as a PDF of hundreds of pages of tables.",
-          "This project was a client's postgraduate thesis work, developed over roughly a year as paid work.",
+          "This project was a client's postgraduate thesis work, developed over roughly a year as paid work. I offered to build it as a web app, but her thesis requirement, set by her advisor, called for a desktop application.",
         ],
       },
       problem: {
@@ -230,10 +240,14 @@ export const projects: Project[] = [
         es: [
           "Una aplicación de escritorio que hace el recorrido completo: extrae las tablas del PDF, las normaliza y las carga en una base de datos relacional, y sobre esa base ofrece una interfaz para armar presupuestos seleccionando análisis unitarios y recursos.",
           "El resultado se exporta a Excel en el formato que la entidad espera recibir.",
+          "El trabajo se hizo en reuniones quincenales de una a dos horas: la clienta explicaba las indicaciones de su director de tesis y yo traducía eso en una solución técnica concreta, iterando según los cambios que pedía el director.",
+          "La aplicación también incluye un visor 3D de modelos BIM: la clienta entregaba archivos IFC (el formato estándar que exporta Revit) y la app los renderiza para inspeccionar el modelo y extraer presupuesto a partir de él.",
         ],
         en: [
           "A desktop application covering the whole path: it extracts the PDF tables, normalizes them and loads them into a relational database, then offers an interface to assemble budgets by selecting unit analyses and resources.",
           "The result exports to Excel in the format the entity expects.",
+          "The work ran on biweekly one-to-two-hour meetings: the client relayed her thesis advisor's guidance, and I translated that into a concrete technical solution, iterating as the advisor requested changes.",
+          "The application also includes a 3D BIM model viewer: the client provided IFC files (the standard format exported by Revit) and the app renders them to inspect the model and derive the budget from it.",
         ],
       },
       decisions: [
@@ -265,24 +279,35 @@ export const projects: Project[] = [
             en: "No single library extracts government-PDF tables well: tabula (on Java) handles regular tables, while plain-text extraction covers the cases that break table detection.",
           },
         },
+        {
+          title: {
+            es: "Optimizar el render 3D en vez de cambiar de stack",
+            en: "Optimizing the 3D render instead of switching stacks",
+          },
+          body: {
+            es: "El visor IFC (ifcopenshell + PyVista/VTK) corría fluido en mi máquina de trabajo, pero el computador de la clienta no tenía GPU para mover la cantidad de polígonos de un modelo BIM completo.",
+            en: "The IFC viewer (ifcopenshell + PyVista/VTK) ran smoothly on my own machine, but the client's computer had no GPU capable of handling a full BIM model's polygon count.",
+          },
+          tradeoff: {
+            es: "La parte más difícil del proyecto no fue el render en sí, sino reducir la cantidad de polígonos y aplicar optimizaciones hasta que corriera fluido en hardware modesto. Fue una decisión consciente: en C++ el rendimiento habría sido mejor de entrada, pero la clienta quería Python y una aplicación de escritorio, así que el problema se resolvió optimizando dentro de esas restricciones en vez de cambiar de lenguaje.",
+            en: "The hardest part of the project wasn't the rendering itself, but reducing the polygon count and applying optimizations until it ran smoothly on modest hardware. It was a deliberate choice: C++ would have performed better out of the box, but the client wanted Python and a desktop app, so the problem was solved by optimizing within those constraints rather than switching languages.",
+          },
+        },
       ],
       results: {
         es: [
           "La tesis fue aprobada y la clienta se graduó de su posgrado.",
+          "Según la clienta, sigue usando la aplicación en su trabajo actualmente.",
         ],
         en: [
           "The thesis was approved and the client graduated from her postgraduate program.",
+          "According to the client, she still uses the application in her work today.",
         ],
       },
     },
     pending: [
-      "¿Por qué escritorio y no web? (¿trabajo sin internet, archivos locales, preferencia de la clienta?)",
-      "¿Cómo fue trabajar un año con una clienta no técnica — cómo se levantaban los requisitos?",
-      "¿Qué fue lo más difícil técnicamente?",
-      "¿Se puede nombrar públicamente a la clienta y su universidad? ¿Hay permiso?",
-      "Capturas de la aplicación corriendo (varias vistas)",
-      "¿Sigue en uso?",
-      "Fechas exactas de inicio y fin",
+      "Capturas de la aplicación corriendo (varias vistas, incluyendo el visor IFC)",
+      "El código del visor IFC vive en la rama `excel` del repo, no en `main` (60 commits adelante / 38 atrás, con bastante ruido: xlsx/csv de prueba, PRUEBAS/, etc.) — pendiente para la Fase 4: decidir merge limpio vs. cherry-pick. El repo también tiene un comando para generar instalador — evaluar alojarlo como demo descargable en el portafolio, en esa misma fase.",
     ],
   },
 
@@ -290,17 +315,17 @@ export const projects: Project[] = [
     slug: "eck",
     name: "ECK",
     client: {
-      es: "Empresa de karting, Canadá",
-      en: "Karting company, Canada",
+      es: "East Coast Karting (ECK), pista de karts en New Brunswick, Canadá",
+      en: "East Coast Karting (ECK), a kart track in New Brunswick, Canada",
     },
-    period: "2026",
+    period: "Mayo — Junio 2026",
     role: {
-      es: "Desarrollo prácticamente completo del landing",
-      en: "Practically the entire landing page",
+      es: "Desarrollo prácticamente completo del landing, diseño incluido",
+      en: "Practically the entire landing page, design included",
     },
     team: {
-      es: "Los requerimientos y la comunicación con el cliente los llevó un compañero",
-      en: "Requirements and client communication were handled by a teammate",
+      es: "Un compañero en Canadá llevó los requerimientos y la comunicación con el cliente en persona, en la pista; yo me coordinaba con él, no directamente con el cliente",
+      en: "A teammate in Canada handled requirements and client communication in person, at the track; I coordinated with him, not directly with the client",
     },
     tagline: {
       es: "Landing page para una empresa de karting, con formulario de contacto",
@@ -314,17 +339,21 @@ export const projects: Project[] = [
       es: [
         "Interfaz en React desplegada en Vercel",
         "API serverless en Node para el formulario de contacto",
+        "Panel de administración con sesión JWT para gestionar el horario de walk-in",
         "Envío de correo con configuración por variables de entorno",
       ],
       en: [
         "React interface deployed on Vercel",
         "Serverless Node API for the contact form",
+        "JWT-authenticated admin panel to manage the walk-in schedule",
         "Email delivery configured through environment variables",
       ],
     },
     stack: [
       { name: "React", group: "frontend" },
       { name: "Node.js", group: "backend" },
+      { name: "JWT", group: "backend" },
+      { name: "Vercel KV", group: "data" },
       { name: "Vercel", group: "infra" },
     ],
     links: [
@@ -349,10 +378,10 @@ export const projects: Project[] = [
     caseStudy: {
       context: {
         es: [
-          "Un cliente en Canadá necesitaba presencia web para su negocio de karting y un canal directo para recibir consultas.",
+          "East Coast Karting, una pista de karts en New Brunswick (Canadá), necesitaba presencia web y un canal directo para recibir consultas. Un compañero llevaba la relación con el cliente en persona, en la pista; yo desarrollaba a distancia coordinando con él.",
         ],
         en: [
-          "A client in Canada needed a web presence for their karting business and a direct channel to receive enquiries.",
+          "East Coast Karting, a kart track in New Brunswick, Canada, needed a web presence and a direct channel to receive enquiries. A teammate managed the client relationship in person, at the track, while I developed remotely, coordinating with him.",
         ],
       },
       problem: {
@@ -365,10 +394,10 @@ export const projects: Project[] = [
       },
       solution: {
         es: [
-          "Desarrollé el landing en React y una función serverless en el mismo despliegue de Vercel que recibe el formulario y envía el correo, con las credenciales fuera del código.",
+          "Diseñé el landing desde cero, partiendo de los componentes de una plantilla de Create React App que encontré y me gustó, y desarrollé una función serverless en el mismo despliegue de Vercel que recibe el formulario y envía el correo, con las credenciales fuera del código.",
         ],
         en: [
-          "I built the landing in React plus a serverless function in the same Vercel deployment that receives the form and sends the email, with credentials kept out of the code.",
+          "I designed the landing from scratch, starting from the components of a Create React App template I found and liked, and built a serverless function in the same Vercel deployment that receives the form and sends the email, with credentials kept out of the code.",
         ],
       },
       decisions: [
@@ -386,6 +415,20 @@ export const projects: Project[] = [
             en: "It avoids maintaining and paying for a separate server for the only thing the site needs from a backend, and keeps SMTP credentials out of the browser.",
           },
         },
+        {
+          title: {
+            es: "Vercel KV para el horario en vez de una base de datos aparte",
+            en: "Vercel KV for the schedule instead of a separate database",
+          },
+          body: {
+            es: "El panel `/admin-eck` (sesión JWT en cookie httpOnly) guarda el horario semanal de walk-in — con overrides por día, hasta 4 franjas horarias — en Vercel KV.",
+            en: "The `/admin-eck` panel (JWT session in an httpOnly cookie) stores the weekly walk-in schedule — with per-day overrides, up to 4 time slots — in Vercel KV.",
+          },
+          tradeoff: {
+            es: "Un solo registro clave-valor es suficiente para un horario que el dueño edita ocasionalmente; una base de datos relacional habría sido sobreingeniería para este alcance.",
+            en: "A single key-value record is enough for a schedule the owner edits occasionally; a relational database would have been over-engineering for this scope.",
+          },
+        },
       ],
       results: {
         es: ["El sitio está en producción en Vercel."],
@@ -393,12 +436,7 @@ export const projects: Project[] = [
       },
     },
     pending: [
-      "¿Rediseño o desde cero? ¿Hubo diseñador o lo diseñaste tú?",
-      "¿Por qué CRA y no Next.js?",
-      "¿Cómo fue coordinar con un cliente en otra zona horaria?",
-      "¿El sitio recibe consultas? ¿Volumen?",
-      "Nombre real de la empresa — ¿se puede publicar?",
-      "Fechas exactas",
+      "El formulario sí llega al correo de la empresa (confirmado) — falta volumen exacto, si se puede saber.",
     ],
   },
 
@@ -409,10 +447,10 @@ export const projects: Project[] = [
       es: "Diego Cadena Ingeniería S.A.S",
       en: "Diego Cadena Ingeniería S.A.S",
     },
-    period: "2026",
+    period: "Desde 2024",
     role: {
-      es: "Desarrollo e implementación completa del sitio",
-      en: "Full site development and implementation",
+      es: "Desarrollo e implementación completa del sitio, con mantenimiento ocasional desde entonces",
+      en: "Full site development and implementation, with occasional maintenance since then",
     },
     team: {
       es: "El diseño lo entregó una diseñadora gráfica en Illustrator",
@@ -470,10 +508,10 @@ export const projects: Project[] = [
     caseStudy: {
       context: {
         es: [
-          "Diego Cadena Ingeniería S.A.S es una firma de perforación horizontal dirigida. Una diseñadora gráfica preparó el diseño completo del sitio en Illustrator; mi trabajo fue convertirlo en un sitio real y funcionando.",
+          "Diego Cadena Ingeniería S.A.S es una firma de perforación horizontal dirigida que no tenía sitio web — este fue su primer sitio, no un rediseño. Una diseñadora gráfica preparó el diseño completo en Illustrator; mi trabajo fue convertirlo en un sitio real y funcionando.",
         ],
         en: [
-          "Diego Cadena Ingeniería S.A.S is a horizontal directional drilling firm. A graphic designer prepared the full site design in Illustrator; my job was turning it into a real, working site.",
+          "Diego Cadena Ingeniería S.A.S is a horizontal directional drilling firm that had no website — this was their first site, not a redesign. A graphic designer prepared the full design in Illustrator; my job was turning it into a real, working site.",
         ],
       },
       problem: {
@@ -525,17 +563,16 @@ export const projects: Project[] = [
       results: {
         es: [
           "El sitio está en producción bajo el dominio propio de la empresa.",
+          "El SEO posicionó el sitio arriba en los resultados de Google para búsquedas de perforación horizontal dirigida en Cali.",
+          "El cliente sigue en contacto: pide ajustes ocasionales, y recientemente encargó una ronda de mantenimiento enfocada en mejorar el posicionamiento, ya entregada.",
         ],
-        en: ["The site is live in production under the company's own domain."],
+        en: [
+          "The site is live in production under the company's own domain.",
+          "The SEO work ranked the site near the top of Google results for horizontal directional drilling searches in Cali.",
+          "The client stays in touch: occasional change requests, and recently commissioned a maintenance round focused on improving search ranking, already delivered.",
+        ],
       },
     },
-    pending: [
-      "¿La empresa tenía sitio antes? ¿Hay un antes/después?",
-      "¿El SEO produjo resultados medibles — posiciones, contactos?",
-      "¿El hosting con PHP fue restricción del cliente o elección tuya?",
-      "¿Le das mantenimiento todavía?",
-      "Fechas exactas",
-    ],
   },
 ];
 

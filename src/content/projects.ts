@@ -1,0 +1,584 @@
+import type { Project, ProjectSlug, SideProject } from "@/types/content";
+
+/**
+ * REGLA DE ESTE ARCHIVO: no se inventan datos.
+ *
+ * Todo lo que está escrito aquí es verificable en los repositorios, en los
+ * sitios en vivo o en el CV. Lo que solo Juan Pablo sabe va en `pending[]`,
+ * que se renderiza como nota ámbar únicamente en `npm run dev`.
+ *
+ * El orden del array es el orden en que aparecen en el sitio.
+ */
+export const projects: Project[] = [
+  {
+    slug: "unidental",
+    name: "UNIDENTAL",
+    client: {
+      es: "Empresa de insumos dentales",
+      en: "Dental supplies company",
+    },
+    period: "2025 — 2026",
+    role: {
+      es: "Backend completo, más gran parte del frontend junto a un compañero",
+      en: "Full backend, plus much of the frontend alongside a teammate",
+    },
+    team: { es: "2 desarrolladores", en: "2 developers" },
+    tagline: {
+      es: "ERP de inventario y ventas para dos sedes, con control de lotes",
+      en: "Inventory and sales ERP for two locations, with batch tracking",
+    },
+    summary: {
+      es: "Un sistema de gestión completo que reemplaza el control manual de inventario: seguimiento de lotes con vencimiento, ventas, órdenes de compra, traslados entre sedes, créditos y caja.",
+      en: "A complete management system replacing manual inventory control: batch tracking with expiry, sales, purchase orders, inter-location transfers, credit accounts and cash handling.",
+    },
+    highlights: {
+      es: [
+        "Inventario multi-sede con selección FIFO de lotes y override manual",
+        "Alertas de vencimiento con umbrales configurables",
+        "Jerarquía de precios: sugerido › última venta › última compra › costo",
+        "API REST documentada con Swagger y Redoc",
+      ],
+      en: [
+        "Multi-location inventory with FIFO batch selection and manual override",
+        "Expiry alerts with configurable thresholds",
+        "Pricing hierarchy: suggested › last sale › last purchase › cost",
+        "REST API documented with Swagger and Redoc",
+      ],
+    },
+    stack: [
+      { name: "Django 5.2", group: "backend" },
+      { name: "Django REST Framework", group: "backend" },
+      { name: "PostgreSQL", group: "data" },
+      { name: "Djoser", group: "backend" },
+      { name: "React 19", group: "frontend" },
+      { name: "Vite", group: "frontend" },
+      { name: "TailwindCSS", group: "frontend" },
+      { name: "Jest", group: "testing" },
+      { name: "Playwright", group: "testing" },
+      { name: "Render", group: "infra" },
+      { name: "Vercel", group: "infra" },
+    ],
+    links: [
+      {
+        kind: "repo-backend",
+        href: "https://github.com/JuanPabloAnteSuarez03/unidental-backend",
+        label: { es: "Backend", en: "Backend" },
+      },
+      {
+        kind: "repo-frontend",
+        href: "https://github.com/JuanPabloAnteSuarez03/unidental-frontend",
+        label: { es: "Frontend", en: "Frontend" },
+      },
+    ],
+    media: {},
+    preview: { mode: "gallery" },
+    caseStudy: {
+      context: {
+        es: [
+          "UNIDENTAL distribuye insumos dentales desde dos sedes en Cali. Su operación diaria involucra productos con fecha de vencimiento, lo que hace que un error de inventario no sea solo una pérdida contable: es mercancía que se vence antes de venderse.",
+        ],
+        en: [
+          "UNIDENTAL distributes dental supplies from two locations in Cali. Their daily operation involves products with expiry dates, which makes an inventory error more than an accounting loss: it is stock that expires before it sells.",
+        ],
+      },
+      problem: {
+        es: [
+          "Llevar inventario con vencimientos por lote, en dos sedes, sin un sistema que lo modele, obliga a decidir de memoria qué lote despachar. El costo aparece tarde y en forma de producto vencido.",
+        ],
+        en: [
+          "Tracking batch-level expiry across two locations without a system that models it forces staff to decide from memory which batch to dispatch. The cost shows up late, as expired product.",
+        ],
+      },
+      solution: {
+        es: [
+          "Construí el backend completo en Django y DRF: catálogo con SKU y lotes, inventario por sede con actualización automática de stock, ventas y devoluciones, compras y proveedores, cuentas por cobrar y pagar, entregas y manejo de caja.",
+          "El frontend en React lo implementamos en gran parte junto a un compañero, sobre la API que ya había definido.",
+        ],
+        en: [
+          "I built the entire backend in Django and DRF: catalog with SKUs and batches, per-location inventory with automatic stock updates, sales and returns, purchases and suppliers, accounts receivable and payable, deliveries and cash management.",
+          "The React frontend we largely implemented together with a teammate, on top of the API I had already defined.",
+        ],
+      },
+      decisions: [
+        {
+          title: {
+            es: "Django y DRF en lugar de Node",
+            en: "Django and DRF instead of Node",
+          },
+          body: {
+            es: "El dominio es fuertemente relacional: productos, lotes, sedes, movimientos y créditos se referencian entre sí y necesitan integridad transaccional.",
+            en: "The domain is strongly relational: products, batches, locations, movements and credits reference each other and need transactional integrity.",
+          },
+          tradeoff: {
+            es: "El admin de Django cubrió el CRUD de catálogo desde el primer día, lo que permitió que el cliente cargara datos reales mientras el frontend todavía se construía.",
+            en: "Django's admin covered catalog CRUD from day one, which let the client load real data while the frontend was still being built.",
+          },
+        },
+        {
+          title: {
+            es: "FIFO automático con override manual",
+            en: "Automatic FIFO with manual override",
+          },
+          body: {
+            es: "El sistema selecciona por defecto el lote más próximo a vencer, que es lo correcto para minimizar pérdidas.",
+            en: "The system defaults to the batch closest to expiry, which is what minimizes losses.",
+          },
+          tradeoff: {
+            es: "Pero el mostrador necesita romper esa regla cuando el cliente pide un lote específico. Automatizar sin dejar salida habría hecho que el personal buscara la forma de esquivar el sistema.",
+            en: "But the counter needs to break that rule when a customer asks for a specific batch. Automating with no escape hatch would have pushed staff to work around the system.",
+          },
+        },
+      ],
+      results: {
+        es: [
+          "El sistema está desplegado: backend en Render, frontend en Vercel, con documentación interactiva de la API en Swagger y Redoc.",
+        ],
+        en: [
+          "The system is deployed: backend on Render, frontend on Vercel, with interactive API documentation in Swagger and Redoc.",
+        ],
+      },
+    },
+    pending: [
+      "¿Cuántos SKU / sedes / transacciones diarias maneja?",
+      "¿Cómo llevaban el inventario antes — Excel, papel?",
+      "¿Está en uso diario en producción hoy?",
+      "Capturas autenticadas: inventario, venta con selección FIFO, alertas de vencimiento, comparación de proveedores, cierre de caja",
+      "URL del Swagger desplegado en Render",
+      "¿Se puede sembrar un usuario demo de solo lectura?",
+      "Fechas exactas de inicio y fin",
+    ],
+  },
+
+  {
+    slug: "presupuestos",
+    name: "Presupuestos de Obra",
+    client: {
+      es: "Cliente particular — trabajo de posgrado",
+      en: "Private client — postgraduate work",
+    },
+    period: "2025",
+    role: {
+      es: "Desarrollo completo, construido de forma iterativa con la clienta",
+      en: "Full development, built iteratively with the client",
+    },
+    tagline: {
+      es: "App de escritorio que convierte un decreto en PDF en presupuestos de obra",
+      en: "Desktop app that turns a PDF decree into construction budgets",
+    },
+    summary: {
+      es: "Una aplicación de escritorio en PyQt6 que extrae los análisis unitarios oficiales del Decreto 1276 de 2021, los modela en base de datos y permite armar presupuestos de obra civil exportables a Excel.",
+      en: "A PyQt6 desktop application that extracts the official unit-price analyses from Decree 1276 of 2021, models them in a database, and lets the user assemble civil works budgets exportable to Excel.",
+    },
+    highlights: {
+      es: [
+        "Extracción de tablas desde el PDF oficial del decreto",
+        "Arquitectura MVC: modelos, vistas y controladores separados",
+        "Modelado relacional de análisis unitarios, recursos y profesionales",
+        "Exportación de presupuestos a Excel con formato definido",
+      ],
+      en: [
+        "Table extraction from the decree's official PDF",
+        "MVC architecture: separate models, views and controllers",
+        "Relational modeling of unit analyses, resources and professionals",
+        "Budget export to Excel in a defined format",
+      ],
+    },
+    stack: [
+      { name: "Python", group: "backend" },
+      { name: "PyQt6", group: "frontend" },
+      { name: "SQLAlchemy", group: "backend" },
+      { name: "PostgreSQL", group: "data" },
+      { name: "pandas", group: "data" },
+      { name: "tabula-py", group: "data" },
+      { name: "pdfminer.six", group: "data" },
+      { name: "PyPDF2", group: "data" },
+      { name: "openpyxl", group: "data" },
+    ],
+    links: [
+      {
+        kind: "repo",
+        href: "https://github.com/JuanPabloAnteSuarez03/Tesis-Paula-Cadena",
+        label: { es: "Código", en: "Code" },
+      },
+    ],
+    media: {},
+    preview: {
+      mode: "app-window",
+      appTitle: "Presupuestos de Obra",
+      panSeconds: 7,
+    },
+    caseStudy: {
+      context: {
+        es: [
+          "En Colombia, los presupuestos de obra pública se construyen sobre análisis de precios unitarios oficiales. Para la Gobernación del Valle esos precios están fijados en el Decreto 1276 de 2021 — publicado como un PDF de cientos de páginas de tablas.",
+          "Este proyecto fue el trabajo de grado de posgrado de una clienta, desarrollado a lo largo de aproximadamente un año como trabajo remunerado.",
+        ],
+        en: [
+          "In Colombia, public works budgets are built on official unit-price analyses. For the Valle regional government those prices are set in Decree 1276 of 2021 — published as a PDF of hundreds of pages of tables.",
+          "This project was a client's postgraduate thesis work, developed over roughly a year as paid work.",
+        ],
+      },
+      problem: {
+        es: [
+          "Los datos que se necesitan para presupuestar están atrapados en un PDF. Transcribirlos a mano para cada presupuesto es lento y propenso a errores, y esos errores se propagan a la oferta económica.",
+        ],
+        en: [
+          "The data needed to build a budget is locked inside a PDF. Transcribing it by hand for every budget is slow and error-prone, and those errors propagate into the final bid.",
+        ],
+      },
+      solution: {
+        es: [
+          "Una aplicación de escritorio que hace el recorrido completo: extrae las tablas del PDF, las normaliza y las carga en una base de datos relacional, y sobre esa base ofrece una interfaz para armar presupuestos seleccionando análisis unitarios y recursos.",
+          "El resultado se exporta a Excel en el formato que la entidad espera recibir.",
+        ],
+        en: [
+          "A desktop application covering the whole path: it extracts the PDF tables, normalizes them and loads them into a relational database, then offers an interface to assemble budgets by selecting unit analyses and resources.",
+          "The result exports to Excel in the format the entity expects.",
+        ],
+      },
+      decisions: [
+        {
+          title: {
+            es: "Arquitectura MVC estricta",
+            en: "Strict MVC architecture",
+          },
+          body: {
+            es: "Modelos, vistas y controladores en carpetas separadas, con un modelo por entidad del dominio: análisis unitario, recurso, presupuesto, profesional.",
+            en: "Models, views and controllers in separate folders, with one model per domain entity: unit analysis, resource, budget, professional.",
+          },
+          tradeoff: {
+            es: "En un proyecto que creció durante un año con requisitos que iban apareciendo, separar la lógica de la interfaz fue lo que permitió agregar vistas nuevas sin romper las existentes.",
+            en: "In a project that grew over a year with requirements emerging along the way, separating logic from interface is what allowed adding new views without breaking existing ones.",
+          },
+        },
+        {
+          title: {
+            es: "Varias librerías de PDF en lugar de una",
+            en: "Several PDF libraries instead of one",
+          },
+          body: {
+            es: "El proyecto usa tabula-py, pdfminer.six y PyPDF2 en conjunto.",
+            en: "The project uses tabula-py, pdfminer.six and PyPDF2 together.",
+          },
+          tradeoff: {
+            es: "Ninguna librería sola extrae bien tablas de un PDF gubernamental: tabula (sobre Java) acierta en las tablas regulares, mientras que la extracción de texto plano resuelve los casos que rompen la detección de tablas.",
+            en: "No single library extracts government-PDF tables well: tabula (on Java) handles regular tables, while plain-text extraction covers the cases that break table detection.",
+          },
+        },
+      ],
+      results: {
+        es: [
+          "La tesis fue aprobada y la clienta se graduó de su posgrado.",
+        ],
+        en: [
+          "The thesis was approved and the client graduated from her postgraduate program.",
+        ],
+      },
+    },
+    pending: [
+      "¿Por qué escritorio y no web? (¿trabajo sin internet, archivos locales, preferencia de la clienta?)",
+      "¿Cómo fue trabajar un año con una clienta no técnica — cómo se levantaban los requisitos?",
+      "¿Qué fue lo más difícil técnicamente?",
+      "¿Se puede nombrar públicamente a la clienta y su universidad? ¿Hay permiso?",
+      "Capturas de la aplicación corriendo (varias vistas)",
+      "¿Sigue en uso?",
+      "Fechas exactas de inicio y fin",
+    ],
+  },
+
+  {
+    slug: "eck",
+    name: "ECK",
+    client: {
+      es: "Empresa de karting, Canadá",
+      en: "Karting company, Canada",
+    },
+    period: "2026",
+    role: {
+      es: "Desarrollo prácticamente completo del landing",
+      en: "Practically the entire landing page",
+    },
+    team: {
+      es: "Los requerimientos y la comunicación con el cliente los llevó un compañero",
+      en: "Requirements and client communication were handled by a teammate",
+    },
+    tagline: {
+      es: "Landing page para una empresa de karting, con formulario de contacto",
+      en: "Landing page for a karting company, with a contact form",
+    },
+    summary: {
+      es: "Un landing page en React para una empresa de karting canadiense, con una API serverless que gestiona el envío del formulario de contacto por correo.",
+      en: "A React landing page for a Canadian karting company, with a serverless API handling contact-form email delivery.",
+    },
+    highlights: {
+      es: [
+        "Interfaz en React desplegada en Vercel",
+        "API serverless en Node para el formulario de contacto",
+        "Envío de correo con configuración por variables de entorno",
+      ],
+      en: [
+        "React interface deployed on Vercel",
+        "Serverless Node API for the contact form",
+        "Email delivery configured through environment variables",
+      ],
+    },
+    stack: [
+      { name: "React", group: "frontend" },
+      { name: "Node.js", group: "backend" },
+      { name: "Vercel", group: "infra" },
+    ],
+    links: [
+      {
+        kind: "live",
+        href: "https://eck-6c79.vercel.app",
+        label: { es: "Ver en vivo", en: "View live" },
+      },
+      {
+        kind: "repo",
+        href: "https://github.com/JuanPabloAnteSuarez03/ECK",
+        label: { es: "Código", en: "Code" },
+      },
+    ],
+    media: {},
+    preview: {
+      mode: "pan",
+      embeddable: true,
+      liveUrl: "https://eck-6c79.vercel.app",
+      panSeconds: 7,
+    },
+    caseStudy: {
+      context: {
+        es: [
+          "Un cliente en Canadá necesitaba presencia web para su negocio de karting y un canal directo para recibir consultas.",
+        ],
+        en: [
+          "A client in Canada needed a web presence for their karting business and a direct channel to receive enquiries.",
+        ],
+      },
+      problem: {
+        es: [
+          "El objetivo del sitio no era informar sino convertir: que quien llegue termine escribiendo. Eso vuelve al formulario de contacto la pieza crítica, no un accesorio.",
+        ],
+        en: [
+          "The site's goal was not to inform but to convert: whoever lands should end up writing in. That makes the contact form the critical piece, not an accessory.",
+        ],
+      },
+      solution: {
+        es: [
+          "Desarrollé el landing en React y una función serverless en el mismo despliegue de Vercel que recibe el formulario y envía el correo, con las credenciales fuera del código.",
+        ],
+        en: [
+          "I built the landing in React plus a serverless function in the same Vercel deployment that receives the form and sends the email, with credentials kept out of the code.",
+        ],
+      },
+      decisions: [
+        {
+          title: {
+            es: "API serverless en el mismo despliegue",
+            en: "Serverless API in the same deployment",
+          },
+          body: {
+            es: "El envío de correo vive como función en `/api`, dentro del mismo proyecto de Vercel que el frontend.",
+            en: "Email delivery lives as a function under `/api`, inside the same Vercel project as the frontend.",
+          },
+          tradeoff: {
+            es: "Evita mantener y pagar un servidor aparte para lo único que el sitio necesita del backend, y mantiene las credenciales SMTP fuera del navegador.",
+            en: "It avoids maintaining and paying for a separate server for the only thing the site needs from a backend, and keeps SMTP credentials out of the browser.",
+          },
+        },
+      ],
+      results: {
+        es: ["El sitio está en producción en Vercel."],
+        en: ["The site is live in production on Vercel."],
+      },
+    },
+    pending: [
+      "¿Rediseño o desde cero? ¿Hubo diseñador o lo diseñaste tú?",
+      "¿Por qué CRA y no Next.js?",
+      "¿Cómo fue coordinar con un cliente en otra zona horaria?",
+      "¿El sitio recibe consultas? ¿Volumen?",
+      "Nombre real de la empresa — ¿se puede publicar?",
+      "Fechas exactas",
+    ],
+  },
+
+  {
+    slug: "camer",
+    name: "Camer",
+    client: {
+      es: "Diego Cadena Ingeniería S.A.S",
+      en: "Diego Cadena Ingeniería S.A.S",
+    },
+    period: "2026",
+    role: {
+      es: "Desarrollo e implementación completa del sitio",
+      en: "Full site development and implementation",
+    },
+    team: {
+      es: "El diseño lo entregó una diseñadora gráfica en Illustrator",
+      en: "The design was delivered by a graphic designer in Illustrator",
+    },
+    tagline: {
+      es: "Sitio corporativo para una firma de perforación horizontal dirigida",
+      en: "Corporate site for a horizontal directional drilling firm",
+    },
+    summary: {
+      es: "Sitio corporativo multipágina implementado fielmente a partir de un diseño en Illustrator, con formulario de contacto funcional, SEO estructurado y dominio propio en producción.",
+      en: "A multi-page corporate site implemented faithfully from an Illustrator design, with a working contact form, structured SEO and its own domain in production.",
+    },
+    highlights: {
+      es: [
+        "Maquetación fiel al diseño entregado, responsive",
+        "Formulario de contacto en PHP con PHPMailer",
+        "SEO estructurado: Schema.org, sitemap y robots.txt",
+        "En producción con dominio propio",
+      ],
+      en: [
+        "Faithful, responsive implementation of the delivered design",
+        "PHP contact form with PHPMailer",
+        "Structured SEO: Schema.org, sitemap and robots.txt",
+        "Live in production on its own domain",
+      ],
+    },
+    stack: [
+      { name: "HTML5", group: "frontend" },
+      { name: "CSS3", group: "frontend" },
+      { name: "JavaScript", group: "frontend" },
+      { name: "Bootstrap 5", group: "frontend" },
+      { name: "PHP 8", group: "backend" },
+      { name: "PHPMailer", group: "backend" },
+    ],
+    links: [
+      {
+        kind: "live",
+        href: "https://diegocadenaingenieria.com/",
+        label: { es: "Ver en vivo", en: "View live" },
+      },
+      {
+        kind: "repo",
+        href: "https://github.com/JuanPabloAnteSuarez03/Camer",
+        label: { es: "Código", en: "Code" },
+      },
+    ],
+    media: {},
+    preview: {
+      mode: "pan",
+      embeddable: true,
+      liveUrl: "https://diegocadenaingenieria.com/",
+      panSeconds: 9,
+    },
+    caseStudy: {
+      context: {
+        es: [
+          "Diego Cadena Ingeniería S.A.S es una firma de perforación horizontal dirigida. Una diseñadora gráfica preparó el diseño completo del sitio en Illustrator; mi trabajo fue convertirlo en un sitio real y funcionando.",
+        ],
+        en: [
+          "Diego Cadena Ingeniería S.A.S is a horizontal directional drilling firm. A graphic designer prepared the full site design in Illustrator; my job was turning it into a real, working site.",
+        ],
+      },
+      problem: {
+        es: [
+          "Un diseño en Illustrator no dice cómo debe comportarse el sitio cuando la pantalla cambia de tamaño, ni qué pasa cuando alguien envía el formulario. Esas decisiones hay que tomarlas al implementar, sin traicionar el diseño.",
+        ],
+        en: [
+          "An Illustrator file does not say how the site should behave when the screen resizes, nor what happens when someone submits the form. Those decisions get made during implementation, without betraying the design.",
+        ],
+      },
+      solution: {
+        es: [
+          "Implementé el sitio multipágina respetando el diseño entregado, con formulario de contacto funcional en PHP y trabajo de SEO técnico: datos estructurados Schema.org, sitemap y robots.txt.",
+        ],
+        en: [
+          "I implemented the multi-page site faithful to the delivered design, with a working PHP contact form and technical SEO work: Schema.org structured data, sitemap and robots.txt.",
+        ],
+      },
+      decisions: [
+        {
+          title: {
+            es: "PHP y PHPMailer en vez de un servicio externo",
+            en: "PHP and PHPMailer instead of an external service",
+          },
+          body: {
+            es: "El formulario de contacto se resuelve en el mismo hosting del sitio.",
+            en: "The contact form is handled on the site's own hosting.",
+          },
+          tradeoff: {
+            es: "El hosting del cliente ya soportaba PHP, así que resolverlo ahí evitó sumarle una suscripción mensual a un negocio que solo necesita recibir correos de contacto.",
+            en: "The client's hosting already supported PHP, so solving it there avoided adding a monthly subscription to a business that only needs to receive contact emails.",
+          },
+        },
+        {
+          title: {
+            es: "SEO estructurado desde el inicio",
+            en: "Structured SEO from the start",
+          },
+          body: {
+            es: "Datos estructurados Schema.org de negocio local, sitemap y robots.txt.",
+            en: "Schema.org local-business structured data, sitemap and robots.txt.",
+          },
+          tradeoff: {
+            es: "Para una firma de ingeniería especializada, aparecer en búsquedas del servicio exacto vale más que cualquier otra optimización: el volumen de búsqueda es bajo pero la intención es altísima.",
+            en: "For a specialized engineering firm, ranking for the exact service matters more than any other optimization: search volume is low but intent is very high.",
+          },
+        },
+      ],
+      results: {
+        es: [
+          "El sitio está en producción bajo el dominio propio de la empresa.",
+        ],
+        en: ["The site is live in production under the company's own domain."],
+      },
+    },
+    pending: [
+      "¿La empresa tenía sitio antes? ¿Hay un antes/después?",
+      "¿El SEO produjo resultados medibles — posiciones, contactos?",
+      "¿El hosting con PHP fue restricción del cliente o elección tuya?",
+      "¿Le das mantenimiento todavía?",
+      "Fechas exactas",
+    ],
+  },
+];
+
+export const projectsBySlug = Object.fromEntries(
+  projects.map((p) => [p.slug, p]),
+) as Record<ProjectSlug, Project>;
+
+/** Proyectos secundarios: solo enlace, sin caso de estudio. */
+export const sideProjects: SideProject[] = [
+  {
+    name: "Interspeaker",
+    description: {
+      es: "Proyecto con integración de voz y APIs de IA.",
+      en: "Project integrating voice and AI APIs.",
+    },
+    tech: ["JavaScript"],
+    repo: "https://github.com/JuanPabloAnteSuarez03/Interspeaker",
+  },
+  {
+    name: "Monetra",
+    description: {
+      es: "Aplicación web de gestión financiera.",
+      en: "Web application for financial management.",
+    },
+    tech: ["JavaScript"],
+    repo: "https://github.com/JuanPabloAnteSuarez03/Monetra",
+  },
+  {
+    name: "IARecetas",
+    description: {
+      es: "Generador de recetas asistido por inteligencia artificial.",
+      en: "AI-assisted recipe generator.",
+    },
+    tech: ["JavaScript"],
+    repo: "https://github.com/JuanPabloAnteSuarez03/IARecetas",
+  },
+  {
+    name: "Secop-Diego-Cadena",
+    description: {
+      es: "Herramienta de análisis sobre datos de contratación pública (SECOP).",
+      en: "Analysis tool over Colombian public procurement data (SECOP).",
+    },
+    tech: ["Python"],
+    repo: "https://github.com/JuanPabloAnteSuarez03/Secop-Diego-Cadena",
+  },
+];

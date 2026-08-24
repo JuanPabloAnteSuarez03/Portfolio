@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/*
+ * Sistema de diseño — portafolio Juan Pablo Ante
+ * Tailwind v4: los tokens viven aquí, no en tailwind.config.ts
+ *
+ * Contrastes verificados contra el fondo #0d0d0f (WCAG 2.1):
+ *   fg #e8e8ec ....... 15.89:1
+ *   fg-muted #a1a1ac .. 7.59:1
+ *   fg-dim #71717a .... 4.02:1  ← solo decorativo, nunca texto real
+ *   accent #a3e635 ... 12.88:1  (13.93:1 con texto negro encima)
+ *   cyan #22d3ee ..... 10.74:1
+ */
+@theme {
+  --color-bg: #0d0d0f;
+  --color-surface: #131316;
+  --color-surface-2: #17171b;
+  --color-border: #26262c;
+  --color-border-strong: #3a3a44;
+
+  --color-fg: #e8e8ec;
+  --color-fg-muted: #a1a1ac;
+  --color-fg-dim: #71717a;
+
+  --color-accent: #a3e635;
+  --color-accent-strong: #65a30d;
+  --color-cyan: #22d3ee;
+  --color-amber: #fbbf24;
+
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* escala tipográfica fluida */
+  --text-display: clamp(2.75rem, 1.5rem + 5vw, 5rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.03em;
+  --text-h2: clamp(1.75rem, 1.1rem + 2.4vw, 2.75rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h3: clamp(1.25rem, 1rem + 0.9vw, 1.5rem);
+  --text-h3--line-height: 1.25;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1;
+  --text-label--letter-spacing: 0.18em;
+
+  --radius-card: 0.875rem;
+  --radius-frame: 0.75rem;
+
+  --shadow-glow: 0 0 0 1px rgb(163 230 53 / 0.18), 0 12px 48px -12px rgb(163 230 53 / 0.22);
+  --ease-pan: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* el nav sticky no debe tapar el título al saltar a un ancla */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #000;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/*
+ * Rejilla técnica de fondo, desvanecida hacia el contenido.
+ *
+ * OJO: `mask-image` enmascara el elemento *y todo su contenido*, así que esta
+ * clase va siempre en una capa absoluta y vacía detrás del contenido, nunca
+ * en el contenedor de la sección — si no, el texto se desvanece con ella.
+ */
+@utility grid-bg {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+/*
+ * Paneo de capturas.
+ * `100cqh` = alto del marco, `-100%` = alto propio de la imagen, así el
+ * recorrido termina exacto al pie de cualquier captura sin medir nada en JS.
+ *
+ * La regla de hover va aquí y no con `hover:` de Tailwind a propósito: en
+ * pantallas táctiles el hover de Tailwind se dispara al mantener pulsado y
+ * deja las tarjetas trabadas a media animación.
+ */
+@media (hover: hover) and (pointer: fine) {
+  .pan-frame:hover .pan-image {
+    transform: translateY(calc(-100% + 100cqh));
+  }
+}

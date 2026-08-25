@@ -261,6 +261,24 @@ async function captureUnidentalGallery(browser) {
   });
   console.log("  ✓ precios-proveedores.png");
 
+  await page.goto(new URL("/caja", UNIDENTAL_DEMO_URL).href, {
+    waitUntil: "domcontentloaded",
+    timeout: 30_000,
+  });
+  await page
+    .waitForFunction(() => !document.body.innerText.includes("Verificando autenticación"), {
+      timeout: 60_000,
+    })
+    .catch(() => console.log("  (timeout esperando auth en /caja, sigo igual)"));
+  await page
+    .waitForFunction(() => !document.body.innerText.includes("Cargando datos de caja"), {
+      timeout: 30_000,
+    })
+    .catch(() => console.log("  (timeout esperando datos de caja, sigo igual)"));
+  await page.waitForTimeout(1_500);
+  await page.screenshot({ path: path.join(outDir, "caja.png"), fullPage: true });
+  console.log("  ✓ caja.png");
+
   await context.close();
 }
 

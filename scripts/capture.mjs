@@ -14,12 +14,38 @@
  */
 import { chromium } from "playwright-core";
 import sharp from "sharp";
-import { mkdir } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ASSETS_DIR = path.join(__dirname, "..", "src", "assets");
+
+/** Parser mínimo de .env.local — sin dependencias nuevas solo para esto. */
+async function loadDotEnvLocal() {
+  const envPath = path.join(__dirname, "..", ".env.local");
+  let content;
+  try {
+    content = await readFile(envPath, "utf8");
+  } catch {
+    return;
+  }
+  for (const line of content.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const eq = trimmed.indexOf("=");
+    if (eq === -1) continue;
+    const key = trimmed.slice(0, eq).trim();
+    let value = trimmed.slice(eq + 1).trim();
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+    if (!(key in process.env)) process.env[key] = value;
+  }
+}
 
 const VIEWPORT = { width: 1280, height: 800 };
 const SCALE_FACTOR = 2;
@@ -116,6 +142,128 @@ async function captureEmbeddedFrames(page) {
   return patches;
 }
 
+/**
+ * UNIDENTAL no es un sitio de marketing estático — es una app autenticada.
+ * En vez de una captura de página completa, sacamos capturas puntuales de
+ * vistas específicas (galería con pie de foto, ver `Preview.mode: "gallery"`
+ * en src/types/content.ts).
+ *
+ * Requiere UNIDENTAL_DEMO_{URL,USER,PASSWORD} en .env.local — es una
+ * instancia demo personal, no producción, pero igual no van hardcodeadas
+ * en este archivo (que sí se commitea).
+ *
+ * Nota: en una sesión sin caché, la app dispara una cascada de refetch del
+ * catálogo completo (1914 productos) que satura el backend gratuito de
+ * Render y deja "Cargando..." colgado en listas secundarias (clientes,
+ * proveedores) hasta que esa cascada termina — de ahí las esperas largas.
+ */
+async function captureUnidentalGallery(browser) {
+  const { UNIDENTAL_DEMO_URL, UNIDENTAL_DEMO_USER, UNIDENTAL_DEMO_PASSWORD } = process.env;
+  if (!UNIDENTAL_DEMO_URL || !UNIDENTAL_DEMO_USER || !UNIDENTAL_DEMO_PASSWORD) {
+    console.error(
+      "→ unidental: faltan UNIDENTAL_DEMO_URL/USER/PASSWORD en .env.local — salto este target.",
+    );
+    return;
+  }
+
+  const outDir = path.join(ASSETS_DIR, "unidental");
+  await mkdir(outDir, { recursive: true });
+
+  const context = await browser.newContext({
+    viewport: VIEWPORT,
+    deviceScaleFactor: SCALE_FACTOR,
+    reducedMotion: "reduce",
+  });
+  const page = await context.newPage();
+
+  console.log(`→ unidental: iniciando sesión en ${UNIDENTAL_DEMO_URL}`);
+  await page.goto(UNIDENTAL_DEMO_URL, { waitUntil: "networkidle", timeout: 60_000 });
+  await page.fill("#username", UNIDENTAL_DEMO_USER);
+  await page.fill("#password", UNIDENTAL_DEMO_PASSWORD);
+  await page.click("text=Ingresar");
+  await page.waitForTimeout(15_000); // cold start del backend en Render (plan gratuito)
+
+  // alertas-vencimiento primero: es liviana y no compite por backend con la
+  // cascada pesada de refetch que dispara /inventario (ver nota arriba).
+  await page.goto(new URL("/inventario/alertas-vencimiento", UNIDENTAL_DEMO_URL).href, {
+    waitUntil: "domcontentloaded",
+    timeout: 30_000,
+  });
+  await page
+    .waitForFunction(
+      () =>
+        !document.body.innerText.includes("Cargando datos") &&
+        !document.body.innerText.includes("Cargando configuración"),
+      { timeout: 45_000 },
+    )
+    .catch(() => console.log("  (timeout esperando alertas-vencimiento, sigo igual)"));
+  await page.waitForTimeout(1_500);
+  await page.screenshot({
+    path: path.join(outDir, "alertas-vencimiento.png"),
+    fullPage: true,
+  });
+  console.log("  ✓ alertas-vencimiento.png");
+
+  await page.goto(new URL("/inventario", UNIDENTAL_DEMO_URL).href, {
+    waitUntil: "domcontentloaded",
+    timeout: 30_000,
+  });
+  console.log("  esperando a que se asiente la cascada de refetch del catálogo...");
+  await page
+    .waitForFunction(
+      () =>
+        !document.body.innerText.includes("Cargando precios de compra") &&
+        !document.body.innerText.includes("Actualizando información de stock"),
+      { timeout: 90_000 },
+    )
+    .catch(() => console.log("  (timeout esperando, sigo igual)"));
+  await page.waitForTimeout(2_000);
+
+  await page.screenshot({ path: path.join(outDir, "inventario.png"), fullPage: true });
+  console.log("  ✓ inventario.png");
+
+  await page.goto(new URL("/ventas", UNIDENTAL_DEMO_URL).href, {
+    waitUntil: "domcontentloaded",
+    timeout: 30_000,
+  });
+  await page.waitForTimeout(2_000);
+  await page.click("text=Sede Norte");
+  await page.waitForTimeout(1_500);
+  await page.fill('input[placeholder*="Buscar producto"]', "SUPER ETCH");
+  await page.waitForTimeout(2_500);
+  await page.click("text=Acido desmineralizante SUPER ETCH SDI 12 gm");
+  await page.waitForTimeout(2_000);
+  await page.click("text=Manual"); // el override manual es lo que vale la pena mostrar
+  await page.waitForTimeout(1_500);
+  await page.evaluate(() => {
+    const el = [...document.querySelectorAll("*")].find(
+      (e) => e.textContent?.trim() === "Control de Lotes Activo",
+    );
+    el?.scrollIntoView({ block: "start" });
+  });
+  await page.waitForTimeout(800);
+  await page.screenshot({ path: path.join(outDir, "venta-fifo.png") });
+  console.log("  ✓ venta-fifo.png");
+
+  // "Comparar Proveedores" no tiene datos usables en este demo: de 100
+  // productos con precio de compra cargado, ninguno tiene más de un
+  // proveedor (confirmado vía API). "Ver tabla de precios" sí muestra
+  // datos reales, así que es la vista honesta para este highlight.
+  await page.goto(new URL("/compras/analisis-precios", UNIDENTAL_DEMO_URL).href, {
+    waitUntil: "domcontentloaded",
+    timeout: 30_000,
+  });
+  await page.click("text=Ver tabla de precios").catch(() => {});
+  await page.waitForTimeout(6_000);
+  await page.screenshot({
+    path: path.join(outDir, "precios-proveedores.png"),
+    fullPage: true,
+  });
+  console.log("  ✓ precios-proveedores.png");
+
+  await context.close();
+}
+
 const targets = [
   {
     slug: "eck",
@@ -176,16 +324,17 @@ async function captureTarget(browser, target) {
   await context.close();
 }
 
-async function main() {
-  const requested = process.argv.slice(2);
-  const selected = requested.length
-    ? targets.filter((t) => requested.includes(t.slug))
-    : targets;
+const ALL_SLUGS = [...targets.map((t) => t.slug), "unidental"];
 
-  if (selected.length === 0) {
-    console.error(
-      `No hay targets que coincidan con: ${requested.join(", ")}\nDisponibles: ${targets.map((t) => t.slug).join(", ")}`,
-    );
+async function main() {
+  await loadDotEnvLocal();
+
+  const requested = process.argv.slice(2);
+  const wanted = requested.length ? requested : ALL_SLUGS;
+
+  const unknown = wanted.filter((s) => !ALL_SLUGS.includes(s));
+  if (unknown.length > 0) {
+    console.error(`No hay targets que coincidan con: ${unknown.join(", ")}\nDisponibles: ${ALL_SLUGS.join(", ")}`);
     process.exit(1);
   }
 
@@ -195,9 +344,10 @@ async function main() {
   });
 
   try {
-    for (const target of selected) {
-      await captureTarget(browser, target);
+    for (const target of targets) {
+      if (wanted.includes(target.slug)) await captureTarget(browser, target);
     }
+    if (wanted.includes("unidental")) await captureUnidentalGallery(browser);
   } finally {
     await browser.close();
   }

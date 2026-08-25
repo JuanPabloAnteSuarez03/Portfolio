@@ -1,5 +1,11 @@
 import type { Project, ProjectSlug, SideProject } from "@/types/content";
 
+import unidentalInventario from "@/assets/unidental/inventario.png";
+import unidentalVentaFifo from "@/assets/unidental/venta-fifo.png";
+import unidentalAlertasVencimiento from "@/assets/unidental/alertas-vencimiento.png";
+import unidentalPreciosProveedores from "@/assets/unidental/precios-proveedores.png";
+import unidentalCaja from "@/assets/unidental/caja.png";
+
 /**
  * REGLA DE ESTE ARCHIVO: no se inventan datos.
  *
@@ -75,7 +81,45 @@ export const projects: Project[] = [
         label: { es: "Swagger", en: "Swagger" },
       },
     ],
-    media: {},
+    media: {
+      gallery: [
+        {
+          src: unidentalInventario,
+          caption: {
+            es: "Inventario por sede, con stock por lote y fecha de vencimiento",
+            en: "Per-location inventory, with stock by batch and expiry date",
+          },
+        },
+        {
+          src: unidentalVentaFifo,
+          caption: {
+            es: "Venta con selección FIFO por lote y override manual",
+            en: "Sale with FIFO batch selection and manual override",
+          },
+        },
+        {
+          src: unidentalAlertasVencimiento,
+          caption: {
+            es: "Alertas de vencimiento por lote",
+            en: "Batch expiry alerts",
+          },
+        },
+        {
+          src: unidentalPreciosProveedores,
+          caption: {
+            es: "Comparación de precios entre proveedores",
+            en: "Price comparison across suppliers",
+          },
+        },
+        {
+          src: unidentalCaja,
+          caption: {
+            es: "Cierre de caja",
+            en: "Cash register close",
+          },
+        },
+      ],
+    },
     preview: { mode: "gallery" },
     caseStudy: {
       context: {
@@ -149,9 +193,6 @@ export const projects: Project[] = [
         ],
       },
     },
-    pending: [
-      "Capturas autenticadas: inventario, venta con selección FIFO, alertas de vencimiento, comparación de proveedores, cierre de caja",
-    ],
   },
 
   {

@@ -6,6 +6,12 @@ import unidentalAlertasVencimiento from "@/assets/unidental/alertas-vencimiento.
 import unidentalPreciosProveedores from "@/assets/unidental/precios-proveedores.png";
 import unidentalCaja from "@/assets/unidental/caja.png";
 
+import eckDesktopFull from "@/assets/eck/desktop-full.png";
+import eckHero from "@/assets/eck/hero.png";
+
+import camerDesktopFull from "@/assets/camer/desktop-full.png";
+import camerHero from "@/assets/camer/hero.png";
+
 /**
  * REGLA DE ESTE ARCHIVO: no se inventan datos.
  *
@@ -408,7 +414,10 @@ export const projects: Project[] = [
         label: { es: "Código", en: "Code" },
       },
     ],
-    media: {},
+    media: {
+      desktopFull: eckDesktopFull,
+      hero: eckHero,
+    },
     preview: {
       mode: "pan",
       embeddable: true,
@@ -538,7 +547,10 @@ export const projects: Project[] = [
         label: { es: "Código", en: "Code" },
       },
     ],
-    media: {},
+    media: {
+      desktopFull: camerDesktopFull,
+      hero: camerHero,
+    },
     preview: {
       mode: "pan",
       embeddable: true,

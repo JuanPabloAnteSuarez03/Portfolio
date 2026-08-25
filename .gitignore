@@ -42,3 +42,6 @@ next-env.d.ts
 
 # capturas sin optimizar: solo se commitea el WebP final en src/assets/
 /screenshots-raw/
+
+# notas locales con credenciales de demo — nunca al repo público
+*.local.md

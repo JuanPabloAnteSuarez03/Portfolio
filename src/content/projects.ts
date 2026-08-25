@@ -151,7 +151,6 @@ export const projects: Project[] = [
     },
     pending: [
       "Capturas autenticadas: inventario, venta con selección FIFO, alertas de vencimiento, comparación de proveedores, cierre de caja",
-      "Usuario demo de solo lectura (NO usar admin123/UnidentalAdmin2024 — son credenciales de admin real, no se publican). Crear un usuario nuevo con permisos mínimos para el portafolio.",
     ],
   },
 

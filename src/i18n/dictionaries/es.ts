@@ -59,6 +59,8 @@ export const es = {
     newTabNote: "(abre en una pestaña nueva)",
     gallery: "Capturas",
     closeImage: "Cerrar imagen",
+    prevImage: "Imagen anterior",
+    nextImage: "Imagen siguiente",
   },
   about: {
     education: "Formación",

@@ -49,7 +49,7 @@ export type Media = {
 export type Preview =
   | { mode: "pan"; embeddable: boolean; liveUrl?: string; panSeconds: number }
   | { mode: "app-window"; appTitle: string; panSeconds: number }
-  | { mode: "gallery" };
+  | { mode: "gallery"; frame?: "app-window"; appTitle?: string };
 
 export type Decision = {
   title: L<string>;

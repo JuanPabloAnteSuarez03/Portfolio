@@ -3,6 +3,9 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/get-dictionary";
 import { type Project, t } from "@/types/content";
 import { Tag } from "@/components/ui/Tag";
+import { BrowserFrame } from "@/components/showcase/BrowserFrame";
+import { ScreenshotPan } from "@/components/showcase/ScreenshotPan";
+import { Gallery } from "@/components/showcase/Gallery";
 
 export function ProjectCard({
   project,
@@ -22,7 +25,44 @@ export function ProjectCard({
       {/* flex-col + mt-auto en la fila de enlaces: quedan alineados al pie
           aunque las tarjetas tengan distinta cantidad de texto. */}
       <div className="flex h-full flex-col p-6 md:p-8">
-        <div className="mb-5 flex items-baseline gap-3">
+        {project.preview.mode === "pan" && project.media.desktopFull && (
+          <BrowserFrame
+            url={
+              project.preview.liveUrl
+                ? new URL(project.preview.liveUrl).host
+                : project.name
+            }
+            live={project.preview.embeddable}
+            liveLabel={dict.showcase.liveBadge}
+          >
+            <ScreenshotPan
+              image={project.media.desktopFull}
+              alt={t(project.tagline, lang)}
+              panSeconds={project.preview.panSeconds}
+              panLabel={dict.showcase.pan}
+              panStopLabel={dict.showcase.panStop}
+            />
+          </BrowserFrame>
+        )}
+
+        {project.preview.mode === "gallery" && project.media.gallery && (
+          <Gallery
+            items={project.media.gallery.map((image) => ({
+              src: image.src,
+              caption: t(image.caption, lang),
+            }))}
+            label={dict.showcase.gallery}
+            frame={project.preview.frame}
+            appTitle={project.preview.appTitle}
+            labels={{
+              close: dict.showcase.closeImage,
+              prev: dict.showcase.prevImage,
+              next: dict.showcase.nextImage,
+            }}
+          />
+        )}
+
+        <div className="mt-6 mb-5 flex items-baseline gap-3">
           <span className="text-accent font-mono text-label tracking-[0.18em]">
             {number}
           </span>

@@ -65,6 +65,8 @@ export const en: Dictionary = {
     newTabNote: "(opens in a new tab)",
     gallery: "Screenshots",
     closeImage: "Close image",
+    prevImage: "Previous image",
+    nextImage: "Next image",
   },
   about: {
     education: "Education",

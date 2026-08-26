@@ -124,3 +124,8 @@
     transform: translateY(calc(-100% + 100cqh));
   }
 }
+
+/* Mismo recorrido, disparado por el botón "Recorrer" — táctil y teclado. */
+.pan-frame.is-panned .pan-image {
+  transform: translateY(calc(-100% + 100cqh));
+}

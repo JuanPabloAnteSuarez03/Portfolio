@@ -319,6 +319,12 @@ async function captureTarget(browser, target) {
 
   if (target.prep) await target.prep(page);
 
+  // Si el screenshot cae a mitad del font-swap de una tipografía custom, el
+  // texto se reacomoda (a veces a más líneas) después de haber calculado su
+  // posición — en Camer eso hizo que el título se montara sobre el nav.
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(500);
+
   const baseBuffer = await page.screenshot({ fullPage: true });
   const patches = await captureEmbeddedFrames(page);
 

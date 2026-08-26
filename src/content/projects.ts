@@ -1,8 +1,12 @@
 import type { Project, ProjectSlug, SideProject } from "@/types/content";
 
 import unidentalInventario from "@/assets/unidental/inventario.png";
-import unidentalVentaFifo from "@/assets/unidental/venta-fifo.png";
+import unidentalNuevoProducto from "@/assets/unidental/nuevo-producto.png";
+import unidentalMovimientosStock from "@/assets/unidental/movimientos-stock.png";
+import unidentalRegistrarVenta from "@/assets/unidental/registrar-venta.png";
+import unidentalOrdenCompra from "@/assets/unidental/orden-compra.png";
 import unidentalAlertasVencimiento from "@/assets/unidental/alertas-vencimiento.png";
+import unidentalAlertasStock from "@/assets/unidental/alertas-stock.png";
 import unidentalPreciosProveedores from "@/assets/unidental/precios-proveedores.png";
 import unidentalCaja from "@/assets/unidental/caja.png";
 
@@ -103,22 +107,50 @@ export const projects: Project[] = [
         {
           src: unidentalInventario,
           caption: {
-            es: "Inventario por sede, con stock por lote y fecha de vencimiento",
-            en: "Per-location inventory, with stock by batch and expiry date",
+            es: "Inventario general: 1.914 productos, con filtros por categoría, sede y stock",
+            en: "General inventory: 1,914 products, filterable by category, location and stock",
           },
         },
         {
-          src: unidentalVentaFifo,
+          src: unidentalNuevoProducto,
           caption: {
-            es: "Venta con selección FIFO por lote y override manual",
-            en: "Sale with FIFO batch selection and manual override",
+            es: "Alta de producto nuevo, con generación asistida de SKU",
+            en: "New product creation, with assisted SKU generation",
+          },
+        },
+        {
+          src: unidentalMovimientosStock,
+          caption: {
+            es: "Movimientos de stock en lote, con historial filtrable por fecha y ubicación",
+            en: "Batch stock movements, with a history filterable by date and location",
+          },
+        },
+        {
+          src: unidentalRegistrarVenta,
+          caption: {
+            es: "Registro de venta: selección de sede, método de pago y facturación opcional",
+            en: "Sale registration: location selection, payment method and optional invoicing",
+          },
+        },
+        {
+          src: unidentalOrdenCompra,
+          caption: {
+            es: "Orden de compra a proveedor, con precios y subtotales editables que se recalculan solos",
+            en: "Purchase order to a supplier, with editable prices and subtotals that recalculate automatically",
           },
         },
         {
           src: unidentalAlertasVencimiento,
           caption: {
-            es: "Alertas de vencimiento por lote",
-            en: "Batch expiry alerts",
+            es: "Alertas de vencimiento por lote, con umbrales configurables por producto",
+            en: "Batch expiry alerts, with configurable per-product thresholds",
+          },
+        },
+        {
+          src: unidentalAlertasStock,
+          caption: {
+            es: "Alertas por nivel de stock: crítico, bajo, normal, alto y excesivo",
+            en: "Stock-level alerts: critical, low, normal, high and excessive",
           },
         },
         {
@@ -137,7 +169,7 @@ export const projects: Project[] = [
         },
       ],
     },
-    preview: { mode: "gallery" },
+    preview: { mode: "gallery", frame: "app-window", appTitle: "UNIDENTAL" },
     caseStudy: {
       context: {
         es: [
@@ -342,7 +374,11 @@ export const projects: Project[] = [
         },
       ],
     },
-    preview: { mode: "gallery" },
+    preview: {
+      mode: "gallery",
+      frame: "app-window",
+      appTitle: "Presupuestos de Obra",
+    },
     caseStudy: {
       context: {
         es: [
@@ -501,7 +537,7 @@ export const projects: Project[] = [
       mode: "pan",
       embeddable: true,
       liveUrl: "https://eck-6c79.vercel.app",
-      panSeconds: 7,
+      panSeconds: 18,
     },
     caseStudy: {
       context: {
@@ -634,7 +670,7 @@ export const projects: Project[] = [
       mode: "pan",
       embeddable: true,
       liveUrl: "https://diegocadenaingenieria.com/",
-      panSeconds: 9,
+      panSeconds: 18,
     },
     caseStudy: {
       context: {

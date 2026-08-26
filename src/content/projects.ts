@@ -6,6 +6,17 @@ import unidentalAlertasVencimiento from "@/assets/unidental/alertas-vencimiento.
 import unidentalPreciosProveedores from "@/assets/unidental/precios-proveedores.png";
 import unidentalCaja from "@/assets/unidental/caja.png";
 
+import presupuestosInicialVacia from "@/assets/app_presupuestos/pantalla-inicial-vacia.png";
+import presupuestosInicialAiu from "@/assets/app_presupuestos/pantalla-inicial-presupuesto-aiu.png";
+import presupuestosInicial3d from "@/assets/app_presupuestos/pantalla-inicial-presupuesto-aiu-3d.png";
+import presupuestosAnalisisUnitario from "@/assets/app_presupuestos/analisis-unitario.png";
+import presupuestosAiu from "@/assets/app_presupuestos/aiu.png";
+import presupuestosCronograma from "@/assets/app_presupuestos/cronograma.png";
+import presupuestosCronogramaTablero from "@/assets/app_presupuestos/cronograma-tablero.png";
+import presupuestosControlEvm from "@/assets/app_presupuestos/control-evm.png";
+import presupuestosEjecucionCompras from "@/assets/app_presupuestos/ejecucion-gastos-compras.png";
+import presupuestosEjecucionNomina from "@/assets/app_presupuestos/ejecucion-gastos-nomina.png";
+
 import eckDesktopFull from "@/assets/eck/desktop-full.png";
 import eckHero from "@/assets/eck/hero.png";
 
@@ -257,12 +268,81 @@ export const projects: Project[] = [
         label: { es: "Código", en: "Code" },
       },
     ],
-    media: {},
-    preview: {
-      mode: "app-window",
-      appTitle: "Presupuestos de Obra",
-      panSeconds: 7,
+    media: {
+      gallery: [
+        {
+          src: presupuestosInicialVacia,
+          caption: {
+            es: "Pantalla inicial, sin presupuesto cargado",
+            en: "Initial screen, with no budget loaded",
+          },
+        },
+        {
+          src: presupuestosInicialAiu,
+          caption: {
+            es: "Presupuesto cargado con análisis de AIU",
+            en: "Budget loaded with AIU analysis",
+          },
+        },
+        {
+          src: presupuestosInicial3d,
+          caption: {
+            es: "Presupuesto y AIU con el modelo 3D del proyecto cargado",
+            en: "Budget and AIU with the project's 3D model loaded",
+          },
+        },
+        {
+          src: presupuestosAnalisisUnitario,
+          caption: {
+            es: "Detalle de un análisis unitario",
+            en: "Detail of a unit-price analysis",
+          },
+        },
+        {
+          src: presupuestosAiu,
+          caption: {
+            es: "Cálculo de Administración, Imprevistos y Utilidad (AIU)",
+            en: "Administration, Contingency and Profit (AIU) calculation",
+          },
+        },
+        {
+          src: presupuestosCronograma,
+          caption: {
+            es: "Cronograma de obra",
+            en: "Project schedule",
+          },
+        },
+        {
+          src: presupuestosCronogramaTablero,
+          caption: {
+            es: "Cronograma en vista de tablero",
+            en: "Schedule in board view",
+          },
+        },
+        {
+          src: presupuestosControlEvm,
+          caption: {
+            es: "Control de ejecución con valor ganado (EVM)",
+            en: "Execution tracking with earned value management (EVM)",
+          },
+        },
+        {
+          src: presupuestosEjecucionCompras,
+          caption: {
+            es: "Ejecución de gastos: compras",
+            en: "Expense execution: purchases",
+          },
+        },
+        {
+          src: presupuestosEjecucionNomina,
+          caption: {
+            es: "Ejecución de gastos: nómina",
+            en: "Expense execution: payroll",
+          },
+        },
+      ],
     },
+    preview: { mode: "gallery" },
     caseStudy: {
       context: {
         es: [
@@ -352,8 +432,7 @@ export const projects: Project[] = [
       },
     },
     pending: [
-      "Capturas de la aplicación corriendo (varias vistas, incluyendo el visor IFC)",
-      "El código del visor IFC vive en la rama `excel` del repo, no en `main` (60 commits adelante / 38 atrás, con bastante ruido: xlsx/csv de prueba, PRUEBAS/, etc.) — pendiente para la Fase 4: decidir merge limpio vs. cherry-pick. El repo también tiene un comando para generar instalador — evaluar alojarlo como demo descargable en el portafolio, en esa misma fase.",
+      "El código del visor IFC vive en la rama `excel` del repo, no en `main` (60 commits adelante / 38 atrás, con bastante ruido: xlsx/csv de prueba, PRUEBAS/, etc.) — pendiente decidir merge limpio vs. cherry-pick. El repo también tiene un comando para generar instalador — evaluar alojarlo como demo descargable en el portafolio.",
     ],
   },
 

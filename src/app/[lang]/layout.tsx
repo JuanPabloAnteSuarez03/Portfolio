@@ -8,6 +8,7 @@ import { siteUrl, alternatesFor } from "@/lib/site";
 import { profile } from "@/content/profile";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollProgress } from "@/components/layout/ScrollProgress";
 
 /**
  * Este ES el layout raíz del sitio (no hay `app/layout.tsx`).
@@ -91,6 +92,7 @@ export default async function RootLayout({
   return (
     <html lang={lang} className={`${fontVariables} h-full antialiased`}>
       <body className="bg-bg text-fg flex min-h-full flex-col">
+        <ScrollProgress />
         <a
           href="#main"
           className="bg-accent sr-only rounded px-4 py-2 font-mono text-sm text-black focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100]"

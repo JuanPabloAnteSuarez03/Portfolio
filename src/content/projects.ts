@@ -550,11 +550,11 @@ export const projects: Project[] = [
       context: {
         es: [
           "East Coast Karting, una pista de karts en New Brunswick (Canadá), necesitaba presencia web y un canal directo para recibir consultas. Un compañero llevaba la relación con el cliente en persona, en la pista; yo desarrollaba a distancia coordinando con él.",
-          "New Brunswick es la única provincia oficialmente bilingüe de Canadá, así que el sitio tenía que funcionar completo en inglés y en francés — no como una traducción a medias.",
+          "New Brunswick es la única provincia oficialmente bilingüe de Canadá, así que el sitio tenía que funcionar completo en inglés y en francés.",
         ],
         en: [
           "East Coast Karting, a kart track in New Brunswick, Canada, needed a web presence and a direct channel to receive inquiries. A teammate managed the client relationship in person, at the track, while I developed remotely, coordinating with him.",
-          "New Brunswick is Canada's only officially bilingual province, so the site had to work fully in both English and French — not as a half-finished translation.",
+          "New Brunswick is Canada's only officially bilingual province, so the site had to work fully in both English and French.",
         ],
       },
       problem: {

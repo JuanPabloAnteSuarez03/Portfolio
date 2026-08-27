@@ -20,6 +20,7 @@ export function ScreenshotPan({
   panLabel,
   panStopLabel,
   className,
+  sizes = "(min-width: 1024px) 50vw, 100vw",
 }: {
   image: StaticImageData;
   alt: string;
@@ -27,6 +28,7 @@ export function ScreenshotPan({
   panLabel: string;
   panStopLabel: string;
   className?: string;
+  sizes?: string;
 }) {
   const [panned, setPanned] = useState(false);
 
@@ -47,7 +49,7 @@ export function ScreenshotPan({
           transitionDuration: `${panSeconds}s`,
           transitionTimingFunction: "var(--ease-pan)",
         }}
-        sizes="(min-width: 1024px) 50vw, 100vw"
+        sizes={sizes}
       />
       <button
         type="button"

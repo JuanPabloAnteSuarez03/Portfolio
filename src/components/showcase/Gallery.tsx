@@ -18,12 +18,14 @@ export function Gallery({
   frame,
   appTitle,
   labels,
+  sizes = "(min-width: 1024px) 50vw, 100vw",
 }: {
   items: Item[];
   label: string;
   frame?: "app-window";
   appTitle?: string;
   labels: { close: string; prev: string; next: string };
+  sizes?: string;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const poster = items[0];
@@ -38,7 +40,7 @@ export function Gallery({
         src={poster.src}
         alt={poster.caption}
         className="absolute top-0 left-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-        sizes="(min-width: 1024px) 50vw, 100vw"
+        sizes={sizes}
       />
       <span className="bg-bg/80 border-border text-fg absolute right-3 bottom-3 rounded-full border px-3 py-1.5 font-mono text-xs backdrop-blur">
         {label} · {items.length}

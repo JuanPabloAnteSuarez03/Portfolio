@@ -78,7 +78,7 @@ export function Lightbox({
           <Image
             src={item.src}
             alt={item.caption}
-            className="border-border rounded-frame w-full max-w-[1800px] border object-contain"
+            className="border-border rounded-frame w-full max-w-[1280px] border object-contain"
           />
         </div>
       </div>

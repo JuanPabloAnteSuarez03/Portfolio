@@ -30,6 +30,7 @@ export function Lightbox({
   nextLabel: string;
 }) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const item = items[index];
   const hasMultiple = items.length > 1;
 
@@ -39,7 +40,33 @@ export function Lightbox({
     document.body.style.overflow = "hidden";
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      /*
+       * `aria-modal` le dice al lector de pantalla que el fondo no existe,
+       * pero no detiene al Tab: sin esto el foco se escapa a los enlaces de
+       * la página que quedó detrás y el usuario pierde el diálogo de vista.
+       */
+      if (event.key === "Tab") {
+        const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
+          '[data-focusable="true"]',
+        );
+        if (!focusable?.length) return;
+
+        const list = Array.from(focusable);
+        const current = document.activeElement as HTMLElement | null;
+        const position = current ? list.indexOf(current) : -1;
+        const delta = event.shiftKey ? -1 : 1;
+        const next = list[(position + delta + list.length) % list.length];
+
+        event.preventDefault();
+        next.focus();
+        return;
+      }
+
       if (!hasMultiple) return;
       if (event.key === "ArrowRight") onIndexChange((index + 1) % items.length);
       if (event.key === "ArrowLeft") onIndexChange((index - 1 + items.length) % items.length);
@@ -54,6 +81,7 @@ export function Lightbox({
 
   return (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-label={item.caption}
@@ -64,13 +92,21 @@ export function Lightbox({
         type="button"
         onClick={onClose}
         aria-label={closeLabel}
+        data-focusable="true"
         className="text-fg hover:text-accent absolute top-4 right-4 z-10 text-3xl leading-none"
       >
         ×
       </button>
 
-      {/* Único scroller: cubre las capturas altas sin recortarlas ni encogerlas. */}
+      {/*
+        Único scroller: cubre las capturas altas sin recortarlas ni encogerlas.
+        Va en el recorrido de tabulación porque una captura de 4000px solo se
+        puede leer con teclado si esta región se puede enfocar y scrollear.
+      */}
       <div
+        tabIndex={0}
+        aria-label={item.caption}
+        data-focusable="true"
         className="min-h-0 flex-1 cursor-zoom-out overflow-y-auto overscroll-contain"
         onClick={onClose}
       >
@@ -91,17 +127,19 @@ export function Lightbox({
               type="button"
               onClick={() => onIndexChange((index - 1 + items.length) % items.length)}
               aria-label={prevLabel}
+              data-focusable="true"
               className="text-fg-muted hover:text-fg text-2xl leading-none"
             >
               ‹
             </button>
-            <span className="text-fg-dim font-mono text-xs">
+            <span className="text-fg-muted font-mono text-xs">
               {index + 1} / {items.length}
             </span>
             <button
               type="button"
               onClick={() => onIndexChange((index + 1) % items.length)}
               aria-label={nextLabel}
+              data-focusable="true"
               className="text-fg-muted hover:text-fg text-2xl leading-none"
             >
               ›

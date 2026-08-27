@@ -78,7 +78,7 @@ export function ProjectCard({
         </p>
 
         <p className="text-fg-muted mt-4 text-sm leading-relaxed">
-          <span className="text-fg-dim font-mono text-xs uppercase">
+          <span className="text-fg-muted font-mono text-xs uppercase">
             {dict.project.role}:{" "}
           </span>
           {t(project.role, lang)}
@@ -92,7 +92,7 @@ export function ProjectCard({
           ))}
           {project.stack.length > 5 && (
             <li>
-              <Tag className="text-fg-dim">+{project.stack.length - 5}</Tag>
+              <Tag>+{project.stack.length - 5}</Tag>
             </li>
           )}
         </ul>

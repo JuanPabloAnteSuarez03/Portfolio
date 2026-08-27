@@ -23,7 +23,7 @@ export function ProjectNav({
           href={`/${lang}/projects/${prev.slug}`}
           className="group border-border bg-surface hover:border-border-strong rounded-card border p-5 transition-colors"
         >
-          <p className="text-fg-dim font-mono text-xs tracking-[0.18em] uppercase">
+          <p className="text-fg-muted font-mono text-xs tracking-[0.18em] uppercase">
             ← {dict.project.previous}
           </p>
           <p className="text-fg group-hover:text-accent mt-2 font-medium transition-colors">
@@ -38,7 +38,7 @@ export function ProjectNav({
           href={`/${lang}/projects/${next.slug}`}
           className="group border-border bg-surface hover:border-border-strong rounded-card border p-5 text-right transition-colors"
         >
-          <p className="text-fg-dim font-mono text-xs tracking-[0.18em] uppercase">
+          <p className="text-fg-muted font-mono text-xs tracking-[0.18em] uppercase">
             {dict.project.next} →
           </p>
           <p className="text-fg group-hover:text-accent mt-2 font-medium transition-colors">

@@ -21,7 +21,7 @@ export function BrowserFrame({
           <span className="bg-fg-dim/40 h-2.5 w-2.5 rounded-full" />
           <span className="bg-fg-dim/40 h-2.5 w-2.5 rounded-full" />
         </div>
-        <span className="text-fg-dim border-border bg-bg flex-1 truncate rounded border px-3 py-1 text-center font-mono text-xs">
+        <span className="text-fg-muted border-border bg-bg flex-1 truncate rounded border px-3 py-1 text-center font-mono text-xs">
           {url}
         </span>
         {live && (

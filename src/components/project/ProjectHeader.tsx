@@ -30,19 +30,19 @@ export function ProjectHeader({
 
       <dl className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
         <div>
-          <dt className="text-fg-dim font-mono text-xs tracking-[0.18em] uppercase">
+          <dt className="text-fg-muted font-mono text-xs tracking-[0.18em] uppercase">
             {dict.project.client}
           </dt>
           <dd className="text-fg mt-1 text-sm">{t(project.client, lang)}</dd>
         </div>
         <div>
-          <dt className="text-fg-dim font-mono text-xs tracking-[0.18em] uppercase">
+          <dt className="text-fg-muted font-mono text-xs tracking-[0.18em] uppercase">
             {dict.project.period}
           </dt>
           <dd className="text-fg mt-1 text-sm">{project.period}</dd>
         </div>
         <div className="sm:col-span-2">
-          <dt className="text-fg-dim font-mono text-xs tracking-[0.18em] uppercase">
+          <dt className="text-fg-muted font-mono text-xs tracking-[0.18em] uppercase">
             {dict.project.role}
           </dt>
           <dd className="text-fg mt-1 text-sm leading-relaxed">
@@ -51,7 +51,7 @@ export function ProjectHeader({
         </div>
         {project.team && (
           <div className="sm:col-span-2">
-            <dt className="text-fg-dim font-mono text-xs tracking-[0.18em] uppercase">
+            <dt className="text-fg-muted font-mono text-xs tracking-[0.18em] uppercase">
               {dict.project.team}
             </dt>
             <dd className="text-fg-muted mt-1 text-sm leading-relaxed">

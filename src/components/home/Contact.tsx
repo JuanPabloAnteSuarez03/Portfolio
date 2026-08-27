@@ -18,7 +18,7 @@ export function Contact({ dict }: { dict: Dictionary }) {
             rel={channel.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
             className="group flex flex-wrap items-center justify-between gap-3 py-5 transition-colors"
           >
-            <span className="text-fg-dim font-mono text-label tracking-[0.18em] uppercase">
+            <span className="text-fg-muted font-mono text-label tracking-[0.18em] uppercase">
               {channel.label}
             </span>
             <span className="text-fg group-hover:text-accent font-mono text-sm break-all transition-colors">

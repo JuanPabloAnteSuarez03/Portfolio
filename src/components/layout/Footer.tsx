@@ -26,7 +26,7 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             >
               {dict.contact.email}
             </a>
-            <span className="text-fg-dim">{dict.footer.builtWith}</span>
+            <span className="text-fg-muted">{dict.footer.builtWith}</span>
           </div>
         </div>
       </Container>

@@ -21,7 +21,7 @@ export function ProjectCard({
   const number = String(index + 1).padStart(2, "0");
 
   return (
-    <article className="border-border bg-surface hover:border-border-strong group h-full rounded-card border transition-[border-color,box-shadow] duration-300 hover:shadow-glow">
+    <article className="border-border bg-surface hover:border-border-strong group h-full overflow-x-hidden rounded-card border transition-[border-color,box-shadow] duration-300 md:overflow-x-visible hover:shadow-glow">
       {/* flex-col + mt-auto en la fila de enlaces: quedan alineados al pie
           aunque las tarjetas tengan distinta cantidad de texto. */}
       <div className="flex h-full flex-col p-6 md:p-8">

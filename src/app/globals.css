@@ -56,9 +56,20 @@
     scroll-behavior: smooth;
     /* el nav sticky no debe tapar el título al saltar a un ancla */
     scroll-padding-top: 5rem;
+    /*
+     * Sin esto, Chrome/Android "encoge" toda la página (viewport-fit) en
+     * cuanto un solo elemento pide más ancho del debido (ej: texto sin
+     * wrap dentro de un flex item) — se ve como si el sitio hiciera zoom
+     * out solo, aunque el elemento en cuestión tenga overflow:hidden.
+     * width:100% ancla el ancho real en vez de dejarlo en auto.
+     */
+    width: 100%;
+    overflow-x: hidden;
   }
 
   body {
+    width: 100%;
+    overflow-x: hidden;
     background: var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-sans);

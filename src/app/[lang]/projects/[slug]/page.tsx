@@ -9,6 +9,7 @@ import { t, type ProjectSlug } from "@/types/content";
 import { ProjectJsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { RevealGrid } from "@/components/ui/RevealGrid";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { ProjectHeader } from "@/components/project/ProjectHeader";
 import { ProjectShowcase } from "@/components/project/ProjectShowcase";
@@ -110,7 +111,7 @@ export default async function ProjectPage({
       </Section>
 
       <Section index="04" title={dict.project.decisions}>
-        <div className="grid gap-6 md:grid-cols-2">
+        <RevealGrid className="grid gap-6 md:grid-cols-2">
           {caseStudy.decisions.map((decision) => (
             <article
               key={t(decision.title, lang)}
@@ -132,7 +133,7 @@ export default async function ProjectPage({
               )}
             </article>
           ))}
-        </div>
+        </RevealGrid>
       </Section>
 
       <Section index="05" title={dict.project.results}>

@@ -2,6 +2,7 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/get-dictionary";
 import { type L, type TechGroup, t } from "@/types/content";
 import { Tag } from "@/components/ui/Tag";
+import { RevealGrid } from "@/components/ui/RevealGrid";
 
 /**
  * Agrupado, sin barras de porcentaje: un "React 80%" no significa nada
@@ -23,7 +24,7 @@ const order: TechGroup[] = ["frontend", "backend", "data", "infra", "testing", "
 
 export function StackSection({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   return (
-    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <RevealGrid className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       {order.map((group) => (
         <div key={group}>
           <h3 className="text-accent mb-4 font-mono text-label tracking-[0.18em] uppercase">
@@ -41,6 +42,6 @@ export function StackSection({ lang, dict }: { lang: Locale; dict: Dictionary })
           </ul>
         </div>
       ))}
-    </div>
+    </RevealGrid>
   );
 }

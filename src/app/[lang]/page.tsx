@@ -5,6 +5,7 @@ import { projects, sideProjects } from "@/content/projects";
 import { t } from "@/types/content";
 import { PersonJsonLd } from "@/components/seo/JsonLd";
 import { Section } from "@/components/ui/Section";
+import { RevealGrid, RevealList } from "@/components/ui/RevealGrid";
 import { Hero } from "@/components/home/Hero";
 import { ProjectCard } from "@/components/home/ProjectCard";
 import { StackSection } from "@/components/home/StackSection";
@@ -34,7 +35,7 @@ export default async function HomePage({
         title={dict.sections.projects}
         lead={dict.sections.projectsLead}
       >
-        <div className="grid gap-6 lg:grid-cols-2">
+        <RevealGrid className="grid gap-6 lg:grid-cols-2">
           {projects.map((project, index) => (
             <ProjectCard
               key={project.slug}
@@ -44,7 +45,7 @@ export default async function HomePage({
               dict={dict}
             />
           ))}
-        </div>
+        </RevealGrid>
       </Section>
 
       <Section
@@ -65,7 +66,7 @@ export default async function HomePage({
         title={dict.sections.sideProjects}
         lead={dict.sections.sideProjectsLead}
       >
-        <ul className="grid gap-4 sm:grid-cols-2">
+        <RevealList className="grid gap-4 sm:grid-cols-2">
           {sideProjects.map((project) => (
             <li key={project.name}>
               <a
@@ -88,7 +89,7 @@ export default async function HomePage({
               </a>
             </li>
           ))}
-        </ul>
+        </RevealList>
       </Section>
 
       <Section

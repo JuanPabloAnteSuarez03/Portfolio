@@ -5,6 +5,11 @@ import type { Dictionary } from "./es";
  * si falta una clave o sobra otra, `npx tsc --noEmit` falla.
  */
 export const en: Dictionary = {
+  meta: {
+    description:
+      "Portfolio of Juan Pablo Ante Suárez, software developer. Case studies of a multi-location inventory ERP, a desktop construction-budgeting app and corporate sites in production.",
+    projectsLabel: "Case study",
+  },
   nav: {
     projects: "Projects",
     stack: "Stack",

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { isLocale } from "@/i18n/config";
+import { isLocale, ogLocales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { projects, projectsBySlug } from "@/content/projects";
+import { profile } from "@/content/profile";
+import { alternatesFor } from "@/lib/site";
 import { t, type ProjectSlug } from "@/types/content";
+import { ProjectJsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { PendingNote } from "@/components/ui/PendingNote";
@@ -31,9 +34,28 @@ export async function generateMetadata({
   const project = getProject(slug);
   if (!isLocale(lang) || !project) return {};
 
+  // El nombre solo: la plantilla del layout le agrega "· Juan Pablo Ante".
+  const title = project.name;
+  const description = t(project.summary, lang);
+  const path = `/projects/${project.slug}`;
+
   return {
-    title: `${project.name} — ${t(project.tagline, lang)}`,
-    description: t(project.summary, lang),
+    title,
+    description,
+    alternates: alternatesFor(lang, path),
+    openGraph: {
+      type: "article",
+      siteName: profile.shortName,
+      title: `${project.name} — ${t(project.tagline, lang)}`,
+      description,
+      url: `/${lang}${path}`,
+      locale: ogLocales[lang],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.name} — ${t(project.tagline, lang)}`,
+      description,
+    },
   };
 }
 
@@ -54,6 +76,8 @@ export default async function ProjectPage({
 
   return (
     <>
+      <ProjectJsonLd lang={lang} slug={project.slug} />
+
       <Container className="pt-12 pb-16 md:pt-16 md:pb-20">
         <ProjectHeader project={project} lang={lang} dict={dict} />
         <div className="mt-10">

@@ -10,10 +10,16 @@ export const localeNames: Record<Locale, { short: string; full: Record<Locale, s
   en: { short: "EN", full: { es: "Inglés", en: "English" } },
 };
 
-/** Códigos BCP-47 para hreflang y OpenGraph. */
+/** Códigos BCP-47 para hreflang. */
 export const localeTags: Record<Locale, string> = {
   es: "es-CO",
   en: "en",
+};
+
+/** OpenGraph pide `language_TERRITORY`, no el BCP-47 con guion. */
+export const ogLocales: Record<Locale, string> = {
+  es: "es_CO",
+  en: "en_US",
 };
 
 export function isLocale(value: string): value is Locale {

@@ -1,4 +1,9 @@
 export const es = {
+  meta: {
+    description:
+      "Portafolio de Juan Pablo Ante Suárez, desarrollador de software. Casos de estudio de un ERP de inventario multi-sede, una app de escritorio de presupuestos de obra y sitios corporativos en producción.",
+    projectsLabel: "Caso de estudio",
+  },
   nav: {
     projects: "Proyectos",
     stack: "Stack",

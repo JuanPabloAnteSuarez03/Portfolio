@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { projects, sideProjects } from "@/content/projects";
 import { t } from "@/types/content";
+import { PersonJsonLd } from "@/components/seo/JsonLd";
 import { Section } from "@/components/ui/Section";
 import { Hero } from "@/components/home/Hero";
 import { ProjectCard } from "@/components/home/ProjectCard";
@@ -23,6 +24,8 @@ export default async function HomePage({
 
   return (
     <>
+      <PersonJsonLd lang={lang} />
+
       <Hero lang={lang} dict={dict} />
 
       <Section

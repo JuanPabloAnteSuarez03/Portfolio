@@ -169,7 +169,7 @@ export const projects: Project[] = [
         },
       ],
     },
-    preview: { mode: "gallery", frame: "app-window", appTitle: "UNIDENTAL" },
+    preview: { mode: "gallery", frame: "app-window", appTitle: "Unidental" },
     caseStudy: {
       context: {
         es: [
@@ -181,12 +181,12 @@ export const projects: Project[] = [
       },
       problem: {
         es: [
-          "Llevar inventario con vencimientos por lote, en dos sedes, sin un sistema que lo modele, obliga a decidir de memoria qué lote despachar. El costo aparece tarde y en forma de producto vencido.",
-          "El inventario vivía antes en hojas de cálculo de Google Sheets, sin relación real entre productos, lotes y sedes.",
+          "El problema de fondo era que UNIDENTAL no tenía su inventario sistematizado: no existía una base de datos real de la empresa, solo hojas de cálculo de Google Sheets sin relación entre productos, lotes y sedes. Cualquier pregunta — cuánto stock quedaba, en qué sede, de qué lote — dependía de revisar y cruzar esas hojas a mano.",
+          "Sobre esa base, sostener el control de vencimientos por lote en dos sedes era prácticamente imposible: sin un sistema que modelara la relación entre productos, lotes y sedes, qué lote despachar quedaba a la memoria del personal, y el costo de un error aparecía tarde, en forma de producto vencido.",
         ],
         en: [
-          "Tracking batch-level expiry across two locations without a system that models it forces staff to decide from memory which batch to dispatch. The cost shows up late, as expired product.",
-          "Inventory previously lived in Google Sheets spreadsheets, with no real relational structure between products, batches and locations.",
+          "The underlying problem was that UNIDENTAL's inventory wasn't systematized at all: there was no real database for the company, only Google Sheets spreadsheets with no relational structure between products, batches and locations. Any question — how much stock was left, at which location, from which batch — meant manually cross-checking those sheets.",
+          "On top of that, sustaining batch-level expiry control across two locations was practically impossible: without a system modeling the relationship between products, batches and locations, which batch to dispatch was left to staff memory, and the cost of a mistake showed up late, as expired product.",
         ],
       },
       solution: {
@@ -212,8 +212,8 @@ export const projects: Project[] = [
             en: "The domain is strongly relational: products, batches, locations, movements and credits reference each other and need transactional integrity.",
           },
           tradeoff: {
-            es: "El admin de Django cubrió el CRUD de catálogo desde el primer día, lo que permitió que el cliente cargara datos reales mientras el frontend todavía se construía.",
-            en: "Django's admin covered catalog CRUD from day one, which let the client load real data while the frontend was still being built.",
+            es: "El admin de Django fue clave durante el desarrollo: lo usamos internamente para cargar y depurar datos reales antes de que el frontend estuviera listo. Pero como el cliente no es técnico, no podía dársele acceso directo — cada operación que necesitaba terminó teniendo que construirse como interfaz real en el frontend.",
+            en: "Django's admin was key during development: we used it internally to load and debug real data before the frontend was ready. But since the client isn't technical, it couldn't be handed to them directly — every operation they needed still had to be built as a real interface in the frontend.",
           },
         },
         {
@@ -257,26 +257,26 @@ export const projects: Project[] = [
       en: "Full development, built iteratively with the client",
     },
     tagline: {
-      es: "App de escritorio que convierte un decreto en PDF en presupuestos de obra",
-      en: "Desktop app that turns a PDF decree into construction budgets",
+      es: "App de escritorio que convierte un proyecto de Revit en presupuesto de obra",
+      en: "Desktop app that turns a Revit project into a construction budget",
     },
     summary: {
-      es: "Una aplicación de escritorio en PyQt6 que extrae los análisis unitarios oficiales del Decreto 1276 de 2021, los modela en base de datos y permite armar presupuestos de obra civil exportables a Excel.",
-      en: "A PyQt6 desktop application that extracts the official unit-price analyses from Decree 1276 of 2021, models them in a database, and lets the user assemble civil works budgets exportable to Excel.",
+      es: "Una aplicación de escritorio en PyQt6 que automatiza el paso de un proyecto de Revit a un presupuesto de obra civil completo — materiales, mano de obra, impuestos y estampillas incluidos —, cruzando el modelo BIM con los análisis unitarios oficiales del Decreto 1276 de 2021.",
+      en: "A PyQt6 desktop application that automates turning a Revit project into a complete civil-works budget — materials, labor, taxes and duty stamps included — by cross-referencing the BIM model with the official unit-price analyses from Decree 1276 of 2021.",
     },
     highlights: {
       es: [
-        "Extracción de tablas desde el PDF oficial del decreto",
-        "Visor 3D de modelos BIM (IFC) optimizado para hardware modesto",
+        "Extracción de presupuesto a partir del modelo BIM (IFC) de Revit, con visor 3D optimizado para hardware modesto",
+        "Cálculo de AIU (Administración, Imprevistos y Utilidad): impuestos, estampillas y demás cargos, no solo materiales",
+        "Extracción de tablas desde el PDF oficial del decreto de precios unitarios",
         "Arquitectura MVC: modelos, vistas y controladores separados",
-        "Modelado relacional de análisis unitarios, recursos y profesionales",
         "Exportación de presupuestos a Excel con formato definido",
       ],
       en: [
-        "Table extraction from the decree's official PDF",
-        "3D BIM model (IFC) viewer optimized for modest hardware",
+        "Budget extraction from the Revit BIM model (IFC), with a 3D viewer optimized for modest hardware",
+        "AIU calculation (Administration, Contingency, Profit): taxes, duty stamps and other charges, not just materials",
+        "Table extraction from the decree's official unit-price PDF",
         "MVC architecture: separate models, views and controllers",
-        "Relational modeling of unit analyses, resources and professionals",
         "Budget export to Excel in a defined format",
       ],
     },
@@ -382,34 +382,38 @@ export const projects: Project[] = [
     caseStudy: {
       context: {
         es: [
-          "En Colombia, los presupuestos de obra pública se construyen sobre análisis de precios unitarios oficiales. Para la Gobernación del Valle esos precios están fijados en el Decreto 1276 de 2021 — publicado como un PDF de cientos de páginas de tablas.",
+          "El requisito central de la tesis era automatizar el paso de un proyecto de Revit a un presupuesto de obra: partir de un modelo BIM y llegar a un formato manejable, parecido a una hoja de cálculo, con el que calcular rápido el presupuesto y los costos completos de la obra.",
+          "En Colombia, esos presupuestos se construyen además sobre análisis de precios unitarios oficiales. Para la Gobernación del Valle esos precios están fijados en el Decreto 1276 de 2021 — publicado como un PDF de cientos de páginas de tablas.",
           "Este proyecto fue el trabajo de grado de posgrado de una clienta, desarrollado a lo largo de aproximadamente un año como trabajo remunerado. Le ofrecí construirlo como aplicación web, pero el requerimiento de su tesis, definido por su director, era una aplicación de escritorio.",
         ],
         en: [
-          "In Colombia, public works budgets are built on official unit-price analyses. For the Valle regional government those prices are set in Decree 1276 of 2021 — published as a PDF of hundreds of pages of tables.",
+          "The thesis's core requirement was to automate turning a Revit project into a construction budget: starting from a BIM model and arriving at a manageable, spreadsheet-like format to quickly calculate the full budget and costs of the works.",
+          "In Colombia, those budgets are also built on official unit-price analyses. For the Valle regional government those prices are set in Decree 1276 of 2021 — published as a PDF of hundreds of pages of tables.",
           "This project was a client's postgraduate thesis work, developed over roughly a year as paid work. I offered to build it as a web app, but her thesis requirement, set by her advisor, called for a desktop application.",
         ],
       },
       problem: {
         es: [
-          "Los datos que se necesitan para presupuestar están atrapados en un PDF. Transcribirlos a mano para cada presupuesto es lento y propenso a errores, y esos errores se propagan a la oferta económica.",
+          "Ir de un modelo de Revit a un presupuesto confiable no tenía un camino corto: había que calcular el costo completo de la obra — materiales, mano de obra, impuestos y estampillas, no solo materiales — y automatizar justamente ese paso, no solo una parte de él, era el requisito central de la tesis.",
+          "Para calcular esos costos con precisión hacía falta, además, el catálogo oficial de precios unitarios de la Gobernación del Valle, y ese catálogo estaba atrapado en un PDF de cientos de páginas: transcribirlo a mano para cada presupuesto era lento y propenso a errores que se propagaban a la oferta económica.",
         ],
         en: [
-          "The data needed to build a budget is locked inside a PDF. Transcribing it by hand for every budget is slow and error-prone, and those errors propagate into the final bid.",
+          "Going from a Revit model to a reliable budget had no shortcut: the full cost of the works had to be calculated — materials, labor, taxes and duty stamps, not just materials — and automating precisely that step, not just part of it, was the thesis's central requirement.",
+          "Calculating those costs accurately also required the Valle regional government's official unit-price catalog, and that catalog was locked inside a PDF of hundreds of pages: transcribing it by hand for every budget was slow and error-prone, with errors that propagated into the final bid.",
         ],
       },
       solution: {
         es: [
-          "Una aplicación de escritorio que hace el recorrido completo: extrae las tablas del PDF, las normaliza y las carga en una base de datos relacional, y sobre esa base ofrece una interfaz para armar presupuestos seleccionando análisis unitarios y recursos.",
+          "El núcleo de la aplicación es leer el modelo BIM del proyecto: la clienta entregaba archivos IFC (el formato estándar que exporta Revit), la app los renderiza en un visor 3D para inspeccionarlos, y a partir de ahí arma el presupuesto — cruzándolo con los análisis unitarios oficiales y calculando también el AIU (Administración, Imprevistos y Utilidad), que es donde entran los impuestos, las estampillas y demás cargos que no son material directo.",
+          "Esos análisis unitarios oficiales salen del Decreto 1276 de 2021: la app extrae sus tablas del PDF, las normaliza y las carga en una base de datos relacional, para que estén disponibles al armar cada presupuesto.",
           "El resultado se exporta a Excel en el formato que la entidad espera recibir.",
           "El trabajo se hizo en reuniones quincenales de una a dos horas: la clienta explicaba las indicaciones de su director de tesis y yo traducía eso en una solución técnica concreta, iterando según los cambios que pedía el director.",
-          "La aplicación también incluye un visor 3D de modelos BIM: la clienta entregaba archivos IFC (el formato estándar que exporta Revit) y la app los renderiza para inspeccionar el modelo y extraer presupuesto a partir de él.",
         ],
         en: [
-          "A desktop application covering the whole path: it extracts the PDF tables, normalizes them and loads them into a relational database, then offers an interface to assemble budgets by selecting unit analyses and resources.",
+          "The core of the application is reading the project's BIM model: the client provided IFC files (the standard format exported by Revit), the app renders them in a 3D viewer for inspection, and from there assembles the budget — cross-referencing it with the official unit-price analyses and also calculating the AIU (Administration, Contingency and Profit), which is where taxes, duty stamps and other charges that aren't direct material cost come in.",
+          "Those official unit-price analyses come from Decree 1276 of 2021: the app extracts its PDF tables, normalizes them and loads them into a relational database, so they're available when assembling each budget.",
           "The result exports to Excel in the format the entity expects.",
           "The work ran on biweekly one-to-two-hour meetings: the client relayed her thesis advisor's guidance, and I translated that into a concrete technical solution, iterating as the advisor requested changes.",
-          "The application also includes a 3D BIM model viewer: the client provided IFC files (the standard format exported by Revit) and the app renders them to inspect the model and derive the budget from it.",
         ],
       },
       decisions: [

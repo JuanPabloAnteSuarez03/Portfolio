@@ -493,22 +493,22 @@ export const projects: Project[] = [
       en: "A teammate in Canada handled requirements and client communication in person, at the track; I coordinated with him, not directly with the client",
     },
     tagline: {
-      es: "Landing page para una empresa de karting, con formulario de contacto",
-      en: "Landing page for a karting company, with a contact form",
+      es: "Landing bilingüe EN/FR para una empresa de karting en Canadá",
+      en: "Bilingual EN/FR landing page for a karting company in Canada",
     },
     summary: {
-      es: "Un landing page en React para una empresa de karting canadiense, con una API serverless que gestiona el envío del formulario de contacto por correo.",
-      en: "A React landing page for a Canadian karting company, with a serverless API handling contact-form email delivery.",
+      es: "Un landing page bilingüe (inglés y francés) en React para una empresa de karting canadiense, con una API serverless que gestiona el formulario de contacto y un panel para que el dueño edite el horario de walk-in.",
+      en: "A bilingual (English and French) React landing page for a Canadian karting company, with a serverless API handling the contact form and an admin panel where the owner edits the walk-in schedule.",
     },
     highlights: {
       es: [
-        "Interfaz en React desplegada en Vercel",
+        "Sitio bilingüe inglés/francés, con las cadenas en un diccionario propio",
         "API serverless en Node para el formulario de contacto",
         "Panel de administración con sesión JWT para gestionar el horario de walk-in",
         "Envío de correo con configuración por variables de entorno",
       ],
       en: [
-        "React interface deployed on Vercel",
+        "Bilingual English/French site, with the strings in a hand-rolled dictionary",
         "Serverless Node API for the contact form",
         "JWT-authenticated admin panel to manage the walk-in schedule",
         "Email delivery configured through environment variables",
@@ -516,7 +516,10 @@ export const projects: Project[] = [
     },
     stack: [
       { name: "React", group: "frontend" },
+      { name: "TailwindCSS", group: "frontend" },
+      { name: "styled-components", group: "frontend" },
       { name: "Node.js", group: "backend" },
+      { name: "Nodemailer", group: "backend" },
       { name: "JWT", group: "backend" },
       { name: "Vercel KV", group: "data" },
       { name: "Vercel", group: "infra" },
@@ -547,9 +550,11 @@ export const projects: Project[] = [
       context: {
         es: [
           "East Coast Karting, una pista de karts en New Brunswick (Canadá), necesitaba presencia web y un canal directo para recibir consultas. Un compañero llevaba la relación con el cliente en persona, en la pista; yo desarrollaba a distancia coordinando con él.",
+          "New Brunswick es la única provincia oficialmente bilingüe de Canadá, así que el sitio tenía que funcionar completo en inglés y en francés — no como una traducción a medias.",
         ],
         en: [
           "East Coast Karting, a kart track in New Brunswick, Canada, needed a web presence and a direct channel to receive inquiries. A teammate managed the client relationship in person, at the track, while I developed remotely, coordinating with him.",
+          "New Brunswick is Canada's only officially bilingual province, so the site had to work fully in both English and French — not as a half-finished translation.",
         ],
       },
       problem: {
@@ -563,9 +568,13 @@ export const projects: Project[] = [
       solution: {
         es: [
           "Diseñé el landing desde cero, partiendo de los componentes de una plantilla de Create React App que encontré y me gustó, y desarrollé una función serverless en el mismo despliegue de Vercel que recibe el formulario y envía el correo, con las credenciales fuera del código.",
+          "Todo el contenido vive en un diccionario bilingüe con inglés y francés, y el visitante cambia de idioma desde el nav.",
+          "El backend serverless terminó siendo más que el formulario: además del envío de correo, expone el login del administrador, la sesión y la lectura y escritura del horario de walk-in.",
         ],
         en: [
           "I designed the landing from scratch, starting from the components of a Create React App template I found and liked, and built a serverless function in the same Vercel deployment that receives the form and sends the email, with credentials kept out of the code.",
+          "All the copy lives in a bilingual dictionary covering English and French, and visitors switch language from the nav.",
+          "The serverless backend ended up being more than the form: alongside email delivery, it exposes admin login, session handling, and reading and writing the walk-in schedule.",
         ],
       },
       decisions: [
@@ -597,15 +606,30 @@ export const projects: Project[] = [
             en: "A single key-value record is enough for a schedule the owner edits occasionally; a relational database would have been over-engineering for this scope.",
           },
         },
+        {
+          title: {
+            es: "Un diccionario propio en vez de una librería de i18n",
+            en: "A hand-rolled dictionary instead of an i18n library",
+          },
+          body: {
+            es: "Las cadenas de los dos idiomas viven en un solo archivo con claves planas, y el idioma por defecto es inglés.",
+            en: "The strings for both languages live in a single file with flat keys, defaulting to English.",
+          },
+          tradeoff: {
+            es: "Para un landing de una sola página, una librería de i18n habría sumado dependencia y configuración sin resolver nada que el archivo plano no resuelva. La contrapartida es que no hay pluralización ni formato de fechas por locale — cosas que este sitio no necesita.",
+            en: "For a single-page landing, an i18n library would have added a dependency and configuration without solving anything the flat file doesn't. The trade-off is no pluralization or locale-aware date formatting — neither of which this site needs.",
+          },
+        },
       ],
       results: {
-        es: ["El sitio está en producción en Vercel."],
-        en: ["The site is live in production on Vercel."],
+        es: [
+          "El sitio está en producción en Vercel, y el formulario llega al correo de la empresa.",
+        ],
+        en: [
+          "The site is live in production on Vercel, and the form reaches the company's inbox.",
+        ],
       },
     },
-    pending: [
-      "El formulario sí llega al correo de la empresa (confirmado) — falta volumen exacto, si se puede saber.",
-    ],
   },
 
   {
@@ -629,20 +653,22 @@ export const projects: Project[] = [
       en: "Corporate site for a horizontal directional drilling firm",
     },
     summary: {
-      es: "Sitio corporativo multipágina implementado fielmente a partir de un diseño en Illustrator, con formulario de contacto funcional, SEO estructurado y dominio propio en producción.",
-      en: "A multi-page corporate site implemented faithfully from an Illustrator design, with a working contact form, structured SEO and its own domain in production.",
+      es: "Sitio corporativo de siete páginas implementado fielmente a partir de un diseño en Illustrator, con formularios de contacto y cotización en PHP, y un trabajo de SEO técnico que va bastante más allá de las etiquetas básicas.",
+      en: "A seven-page corporate site implemented faithfully from an Illustrator design, with PHP contact and quote forms, and technical SEO work that goes well beyond the basic tags.",
     },
     highlights: {
       es: [
         "Maquetación fiel al diseño entregado, responsive",
-        "Formulario de contacto en PHP con PHPMailer",
-        "SEO estructurado: Schema.org, sitemap y robots.txt",
+        "Formularios de contacto y de cotización en PHP con PHPMailer",
+        "Datos estructurados Schema.org: negocio local, catálogo de servicios y FAQ",
+        "URLs limpias, HTTPS forzado y HSTS vía .htaccess",
         "En producción con dominio propio",
       ],
       en: [
         "Faithful, responsive implementation of the delivered design",
-        "PHP contact form with PHPMailer",
-        "Structured SEO: Schema.org, sitemap and robots.txt",
+        "PHP contact and quote forms with PHPMailer",
+        "Schema.org structured data: local business, service catalog and FAQ",
+        "Clean URLs, forced HTTPS and HSTS via .htaccess",
         "Live in production on its own domain",
       ],
     },
@@ -653,6 +679,8 @@ export const projects: Project[] = [
       { name: "Bootstrap 5", group: "frontend" },
       { name: "PHP 8", group: "backend" },
       { name: "PHPMailer", group: "backend" },
+      { name: "Apache / .htaccess", group: "infra" },
+      { name: "Schema.org", group: "tooling" },
     ],
     links: [
       {
@@ -695,10 +723,14 @@ export const projects: Project[] = [
       },
       solution: {
         es: [
-          "Implementé el sitio multipágina respetando el diseño entregado, con formulario de contacto funcional en PHP y trabajo de SEO técnico: datos estructurados Schema.org, sitemap y robots.txt.",
+          "Implementé las siete páginas respetando el diseño entregado, con dos formularios funcionales en PHP — contacto y solicitud de cotización — resueltos con PHPMailer sobre el hosting del propio cliente.",
+          "El grueso del trabajo invisible está en el SEO técnico: datos estructurados de Schema.org que describen a la empresa como negocio local y contratista, su catálogo de servicios, las ciudades donde opera y una sección de preguntas frecuentes; más meta tags geográficos, tarjetas de Open Graph y Twitter, URLs canónicas, sitemap y robots.txt.",
+          "La configuración de Apache hace el resto: fuerza HTTPS, unifica el dominio con y sin `www`, sirve las páginas sin la extensión `.html` y redirige las rutas viejas para no perder lo que ya estaba indexado.",
         ],
         en: [
-          "I implemented the multi-page site faithful to the delivered design, with a working PHP contact form and technical SEO work: Schema.org structured data, sitemap and robots.txt.",
+          "I implemented all seven pages faithful to the delivered design, with two working PHP forms — contact and quote request — handled by PHPMailer on the client's own hosting.",
+          "Most of the invisible work is in the technical SEO: Schema.org structured data describing the company as a local business and contractor, its service catalog, the cities it operates in, and a frequently-asked-questions section; plus geo meta tags, Open Graph and Twitter cards, canonical URLs, a sitemap and robots.txt.",
+          "The Apache configuration does the rest: it forces HTTPS, collapses the domain with and without `www`, serves pages without the `.html` extension, and redirects the old paths so nothing already indexed is lost.",
         ],
       },
       decisions: [
@@ -722,12 +754,26 @@ export const projects: Project[] = [
             en: "Structured SEO from the start",
           },
           body: {
-            es: "Datos estructurados Schema.org de negocio local, sitemap y robots.txt.",
-            en: "Schema.org local-business structured data, sitemap and robots.txt.",
+            es: "El negocio se declara en Schema.org como negocio local, contratista general y servicio profesional a la vez, con dirección, coordenadas, horario, catálogo de servicios y las ciudades donde opera.",
+            en: "The business is declared in Schema.org as a local business, general contractor and professional service at once, with address, coordinates, opening hours, service catalog and the cities it covers.",
           },
           tradeoff: {
-            es: "Para una firma de ingeniería especializada, aparecer en búsquedas del servicio exacto vale más que cualquier otra optimización: el volumen de búsqueda es bajo pero la intención es altísima.",
-            en: "For a specialized engineering firm, ranking for the exact service matters more than any other optimization: search volume is low but intent is very high.",
+            es: "Para una firma de ingeniería especializada, aparecer en búsquedas del servicio exacto vale más que cualquier otra optimización: el volumen de búsqueda es bajo pero la intención es altísima. Describir el negocio en varias categorías a la vez es deliberado — no se sabe de antemano bajo cuál lo va a clasificar el buscador.",
+            en: "For a specialized engineering firm, ranking for the exact service matters more than any other optimization: search volume is low but intent is very high. Describing the business under several categories at once is deliberate — there's no way to know in advance which one the search engine will file it under.",
+          },
+        },
+        {
+          title: {
+            es: "Preguntas frecuentes marcadas como datos estructurados",
+            en: "FAQ marked up as structured data",
+          },
+          body: {
+            es: "Las preguntas frecuentes no son solo un bloque de texto: van marcadas como `FAQPage`, con cada pregunta y su respuesta declaradas por separado.",
+            en: "The frequently-asked questions aren't just a block of text: they're marked up as a `FAQPage`, with each question and its answer declared separately.",
+          },
+          tradeoff: {
+            es: "Le da al buscador la posibilidad de mostrar las respuestas directamente en los resultados. Para un servicio que la gente no sabe cómo se llama — mucha gente busca «topo» y no «perforación horizontal dirigida» —, responder la duda antes del clic es lo que gana la visita.",
+            en: "It gives the search engine the option of showing the answers directly in the results. For a service people don't know the name of — many search for the colloquial term rather than \"horizontal directional drilling\" — answering the question before the click is what wins the visit.",
           },
         },
       ],

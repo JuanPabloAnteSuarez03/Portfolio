@@ -79,7 +79,7 @@ export default async function ProjectPage({
     <>
       <ProjectJsonLd lang={lang} slug={project.slug} />
 
-      <Container className="pt-12 pb-16 md:pt-16 md:pb-20">
+      <Container className="fade-in-load pt-12 pb-16 md:pt-16 md:pb-20">
         <ProjectHeader project={project} lang={lang} dict={dict} />
         <div className="mt-10">
           <ProjectShowcase project={project} lang={lang} dict={dict} />

@@ -192,3 +192,27 @@
   opacity: 0;
   transform: translateY(20px);
 }
+
+/*
+ * Fundido al cargar la página, para lo que está sobre el pliegue (Hero,
+ * header de caso de estudio) y por eso queda afuera de `Reveal` — sin este
+ * efecto aparecía de golpe apenas terminaba de cargar, y se sentía brusco.
+ *
+ * Animación CSS pura, sin JS: no depende de scroll, así que no hay nada que
+ * decidir en runtime. `prefers-reduced-motion` ya está cubierto arriba
+ * (`animation-duration: 0.01ms`), así que tampoco hay que ramificar acá.
+ */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-load {
+  animation: fade-in-up 0.7s var(--ease-pan) both;
+}

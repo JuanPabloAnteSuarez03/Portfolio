@@ -10,7 +10,7 @@ export function Hero({ lang, dict }: { lang: Locale; dict: Dictionary }) {
       {/* Capa propia: `mask-image` enmascararía también el texto si fuera al contenedor. */}
       <div className="grid-bg absolute inset-0" aria-hidden="true" />
 
-      <Container className="relative py-24 md:py-36">
+      <Container className="fade-in-load relative py-24 md:py-36">
         <p className="text-accent mb-6 font-mono text-label tracking-[0.18em] uppercase">
           <span aria-hidden="true">$ </span>
           {dict.hero.role}

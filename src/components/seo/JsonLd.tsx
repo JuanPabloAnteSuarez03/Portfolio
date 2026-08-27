@@ -1,4 +1,5 @@
 import type { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/get-dictionary";
 import { profile } from "@/content/profile";
 import { projects } from "@/content/projects";
 import { t } from "@/types/content";
@@ -17,6 +18,7 @@ import { siteUrl } from "@/lib/site";
  * tipado, y se sanea `<` para cerrar la vía de inyección de etiquetas.
  */
 export function PersonJsonLd({ lang }: { lang: Locale }) {
+  const dict = getDictionary(lang);
   const data = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -24,7 +26,7 @@ export function PersonJsonLd({ lang }: { lang: Locale }) {
     url: `${siteUrl}/${lang}`,
     email: profile.email,
     telephone: profile.phone,
-    jobTitle: lang === "es" ? "Desarrollador de software" : "Software developer",
+    jobTitle: dict.hero.role,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Cali",

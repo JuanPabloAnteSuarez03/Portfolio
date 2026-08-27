@@ -8,7 +8,7 @@ import { profile } from "@/content/profile";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 
-type Strings = { title: string; body: string; back: string };
+type Strings = { title: string; body: string; back: string; projects: string };
 
 /**
  * Next no le pasa `params` a `not-found.tsx`, así que el idioma se deduce del
@@ -57,7 +57,7 @@ export function NotFoundContent({
         href={`/${lang}#projects`}
         className="text-fg-muted hover:text-accent mt-6 font-mono text-sm transition-colors"
       >
-        {lang === "es" ? "Ver proyectos" : "View projects"} →
+        {text.projects} →
       </Link>
     </Container>
   );

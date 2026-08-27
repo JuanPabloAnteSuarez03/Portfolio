@@ -74,7 +74,8 @@ export type Project = {
   /** Nombre de marca — nunca se traduce. */
   name: string;
   client: L<string>;
-  period: string;
+  /** Bilingüe: los nombres de mes y "Desde"/"Since" sí se traducen. */
+  period: L<string>;
   /** El encuadre honesto del rol. Ni inflado ni subestimado. */
   role: L<string>;
   team?: L<string>;

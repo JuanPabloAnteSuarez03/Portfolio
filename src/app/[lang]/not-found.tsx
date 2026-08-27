@@ -4,5 +4,12 @@ import { NotFoundContent } from "@/components/layout/NotFoundContent";
 
 /** 404 dentro de un idioma — hereda el nav y el footer del layout. */
 export default function NotFound() {
-  return <NotFoundContent strings={{ es: es.notFound, en: en.notFound }} />;
+  return (
+    <NotFoundContent
+      strings={{
+        es: { ...es.notFound, projects: es.nav.projects },
+        en: { ...en.notFound, projects: en.nav.projects },
+      }}
+    />
+  );
 }

@@ -70,7 +70,7 @@ export function ProjectCard({
         </div>
 
         <p className="text-fg-muted mb-1 font-mono text-xs">
-          {t(project.client, lang)} · {project.period}
+          {t(project.client, lang)} · {t(project.period, lang)}
         </p>
 
         <p className="text-fg mt-4 text-lg leading-snug text-pretty">

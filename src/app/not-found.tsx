@@ -20,7 +20,12 @@ import { en } from "@/i18n/dictionaries/en";
 export default function NotFound() {
   return (
     <div className={`${fontVariables} bg-bg text-fg min-h-screen antialiased`}>
-      <NotFoundContent strings={{ es: es.notFound, en: en.notFound }} />
+      <NotFoundContent
+        strings={{
+          es: { ...es.notFound, projects: es.nav.projects },
+          en: { ...en.notFound, projects: en.nav.projects },
+        }}
+      />
     </div>
   );
 }

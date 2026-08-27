@@ -39,7 +39,7 @@ export function ProjectHeader({
           <dt className="text-fg-muted font-mono text-xs tracking-[0.18em] uppercase">
             {dict.project.period}
           </dt>
-          <dd className="text-fg mt-1 text-sm">{project.period}</dd>
+          <dd className="text-fg mt-1 text-sm">{t(project.period, lang)}</dd>
         </div>
         <div className="sm:col-span-2">
           <dt className="text-fg-muted font-mono text-xs tracking-[0.18em] uppercase">

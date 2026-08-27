@@ -31,7 +31,7 @@ export const en: Dictionary = {
   sections: {
     projects: "Projects",
     projectsLead:
-      "Four projects with real clients. Each with its case study: what needed solving, what I built, and why I decided it that way.",
+      "Four projects with real clients. Each with its case study: what needed solving, what I built, and why I made those decisions.",
     stack: "Stack",
     stackLead: "The tools I work with.",
     about: "About",

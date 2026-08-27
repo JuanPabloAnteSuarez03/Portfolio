@@ -44,7 +44,7 @@ export const projects: Project[] = [
       es: "Empresa de insumos dentales",
       en: "Dental supplies company",
     },
-    period: "2025",
+    period: { es: "2025", en: "2025" },
     role: {
       es: "Backend completo, más gran parte del frontend junto a un compañero",
       en: "Full backend, plus much of the frontend alongside a teammate",
@@ -164,7 +164,7 @@ export const projects: Project[] = [
           src: unidentalCaja,
           caption: {
             es: "Cierre de caja",
-            en: "Cash register close",
+            en: "End-of-day cash close",
           },
         },
       ],
@@ -197,7 +197,7 @@ export const projects: Project[] = [
         ],
         en: [
           "I built the entire backend in Django and DRF: catalog with SKUs and batches, per-location inventory with automatic stock updates, sales and returns, purchases and suppliers, accounts receivable and payable, deliveries and cash management.",
-          "The React frontend we largely implemented together with a teammate, on top of the API I had already defined.",
+          "We implemented much of the React frontend together with a teammate, on top of the API I had already defined.",
           "To migrate the real data, I wrote scripts that read the client's Google Sheets and populated the new database.",
         ],
       },
@@ -251,7 +251,7 @@ export const projects: Project[] = [
       es: "Paula Cadena — trabajo de posgrado, Universidad del Valle",
       en: "Paula Cadena — postgraduate work, Universidad del Valle",
     },
-    period: "Febrero 2025 — Febrero 2026",
+    period: { es: "Febrero 2025 — Febrero 2026", en: "February 2025 — February 2026" },
     role: {
       es: "Desarrollo completo, construido de forma iterativa con la clienta",
       en: "Full development, built iteratively with the client",
@@ -262,7 +262,7 @@ export const projects: Project[] = [
     },
     summary: {
       es: "Una aplicación de escritorio en PyQt6 que automatiza el paso de un proyecto de Revit a un presupuesto de obra civil completo — materiales, mano de obra, impuestos y estampillas incluidos —, cruzando el modelo BIM con los análisis unitarios oficiales del Decreto 1276 de 2021.",
-      en: "A PyQt6 desktop application that automates turning a Revit project into a complete civil-works budget — materials, labor, taxes and duty stamps included — by cross-referencing the BIM model with the official unit-price analyses from Decree 1276 of 2021.",
+      en: "A PyQt6 desktop application that automates turning a Revit project into a complete civil-works budget — materials, labor, taxes and stamp levies included — by cross-referencing the BIM model with the official unit-price analyses from Decree 1276 of 2021.",
     },
     highlights: {
       es: [
@@ -274,7 +274,7 @@ export const projects: Project[] = [
       ],
       en: [
         "Budget extraction from the Revit BIM model (IFC), with a 3D viewer optimized for modest hardware",
-        "AIU calculation (Administration, Contingency, Profit): taxes, duty stamps and other charges, not just materials",
+        "AIU calculation (Administration, Contingency, Profit): taxes, stamp levies and other charges, not just materials",
         "Table extraction from the decree's official unit-price PDF",
         "MVC architecture: separate models, views and controllers",
         "Budget export to Excel in a defined format",
@@ -394,11 +394,11 @@ export const projects: Project[] = [
       },
       problem: {
         es: [
-          "Ir de un modelo de Revit a un presupuesto confiable no tenía un camino corto: había que calcular el costo completo de la obra — materiales, mano de obra, impuestos y estampillas, no solo materiales — y automatizar justamente ese paso, no solo una parte de él, era el requisito central de la tesis.",
+          "Ir de un modelo de Revit a un presupuesto confiable no tenía un camino corto: había que calcular el costo completo de la obra, que no son solo los materiales — también entran la mano de obra, los impuestos y las estampillas —, y automatizar ese recorrido entero, no una parte, era el requisito central de la tesis.",
           "Para calcular esos costos con precisión hacía falta, además, el catálogo oficial de precios unitarios de la Gobernación del Valle, y ese catálogo estaba atrapado en un PDF de cientos de páginas: transcribirlo a mano para cada presupuesto era lento y propenso a errores que se propagaban a la oferta económica.",
         ],
         en: [
-          "Going from a Revit model to a reliable budget had no shortcut: the full cost of the works had to be calculated — materials, labor, taxes and duty stamps, not just materials — and automating precisely that step, not just part of it, was the thesis's central requirement.",
+          "Going from a Revit model to a reliable budget had no shortcut: the full cost of the works had to be calculated, and that is not just materials — labor, taxes and stamp levies all count too. Automating that whole path, not one part of it, was the thesis's central requirement.",
           "Calculating those costs accurately also required the Valle regional government's official unit-price catalog, and that catalog was locked inside a PDF of hundreds of pages: transcribing it by hand for every budget was slow and error-prone, with errors that propagated into the final bid.",
         ],
       },
@@ -410,9 +410,9 @@ export const projects: Project[] = [
           "El trabajo se hizo en reuniones quincenales de una a dos horas: la clienta explicaba las indicaciones de su director de tesis y yo traducía eso en una solución técnica concreta, iterando según los cambios que pedía el director.",
         ],
         en: [
-          "The core of the application is reading the project's BIM model: the client provided IFC files (the standard format exported by Revit), the app renders them in a 3D viewer for inspection, and from there assembles the budget — cross-referencing it with the official unit-price analyses and also calculating the AIU (Administration, Contingency and Profit), which is where taxes, duty stamps and other charges that aren't direct material cost come in.",
+          "The core of the application is reading the project's BIM model: the client provided IFC files (the standard format exported by Revit), the app renders them in a 3D viewer for inspection, and from there assembles the budget — cross-referencing it with the official unit-price analyses and also calculating the AIU (Administration, Contingency and Profit), which is where taxes, stamp levies and other charges that aren't direct material cost come in.",
           "Those official unit-price analyses come from Decree 1276 of 2021: the app extracts its PDF tables, normalizes them and loads them into a relational database, so they're available when assembling each budget.",
-          "The result exports to Excel in the format the entity expects.",
+          "The result exports to Excel in the format the government agency expects.",
           "The work ran on biweekly one-to-two-hour meetings: the client relayed her thesis advisor's guidance, and I translated that into a concrete technical solution, iterating as the advisor requested changes.",
         ],
       },
@@ -483,7 +483,7 @@ export const projects: Project[] = [
       es: "East Coast Karting (ECK), pista de karts en New Brunswick, Canadá",
       en: "East Coast Karting (ECK), a kart track in New Brunswick, Canada",
     },
-    period: "Mayo — Junio 2026",
+    period: { es: "Mayo — Junio 2026", en: "May — June 2026" },
     role: {
       es: "Desarrollo prácticamente completo del landing, diseño incluido",
       en: "Practically the entire landing page, design included",
@@ -549,7 +549,7 @@ export const projects: Project[] = [
           "East Coast Karting, una pista de karts en New Brunswick (Canadá), necesitaba presencia web y un canal directo para recibir consultas. Un compañero llevaba la relación con el cliente en persona, en la pista; yo desarrollaba a distancia coordinando con él.",
         ],
         en: [
-          "East Coast Karting, a kart track in New Brunswick, Canada, needed a web presence and a direct channel to receive enquiries. A teammate managed the client relationship in person, at the track, while I developed remotely, coordinating with him.",
+          "East Coast Karting, a kart track in New Brunswick, Canada, needed a web presence and a direct channel to receive inquiries. A teammate managed the client relationship in person, at the track, while I developed remotely, coordinating with him.",
         ],
       },
       problem: {
@@ -557,7 +557,7 @@ export const projects: Project[] = [
           "El objetivo del sitio no era informar sino convertir: que quien llegue termine escribiendo. Eso vuelve al formulario de contacto la pieza crítica, no un accesorio.",
         ],
         en: [
-          "The site's goal was not to inform but to convert: whoever lands should end up writing in. That makes the contact form the critical piece, not an accessory.",
+          "The site's goal was not to inform but to convert: whoever lands on it should end up getting in touch. That makes the contact form the critical piece, not an accessory.",
         ],
       },
       solution: {
@@ -615,7 +615,7 @@ export const projects: Project[] = [
       es: "Diego Cadena Ingeniería S.A.S",
       en: "Diego Cadena Ingeniería S.A.S",
     },
-    period: "Desde 2024",
+    period: { es: "Desde 2024", en: "Since 2024" },
     role: {
       es: "Desarrollo e implementación completa del sitio, con mantenimiento ocasional desde entonces",
       en: "Full site development and implementation, with occasional maintenance since then",
@@ -739,7 +739,7 @@ export const projects: Project[] = [
         ],
         en: [
           "The site is live in production under the company's own domain.",
-          "The SEO work ranked the site near the top of Google results for horizontal directional drilling searches in Cali.",
+          "The SEO work put the site near the top of Google results for horizontal directional drilling searches in Cali.",
           "The client stays in touch: occasional change requests, and recently commissioned a maintenance round focused on improving search ranking, already delivered.",
         ],
       },

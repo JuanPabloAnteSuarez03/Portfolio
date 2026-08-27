@@ -1,8 +1,8 @@
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/get-dictionary";
-import { profile } from "@/content/profile";
 import { Container } from "@/components/ui/Container";
+import { HomeLink } from "./HomeLink";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function Nav({ lang, dict }: { lang: Locale; dict: Dictionary }) {
@@ -17,15 +17,7 @@ export function Nav({ lang, dict }: { lang: Locale; dict: Dictionary }) {
     <header className="border-border bg-bg/80 sticky top-0 z-50 border-b backdrop-blur-md">
       <Container>
         <nav className="flex h-16 items-center justify-between gap-4">
-          <Link
-            href={`/${lang}`}
-            className="text-fg hover:text-accent font-mono text-sm transition-colors"
-          >
-            <span className="text-accent" aria-hidden="true">
-              ${" "}
-            </span>
-            {profile.handle}
-          </Link>
+          <HomeLink lang={lang} />
 
           <div className="flex items-center gap-6">
             <ul className="hidden items-center gap-6 md:flex">

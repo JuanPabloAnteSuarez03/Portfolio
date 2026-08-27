@@ -114,7 +114,7 @@ export default async function ProjectPage({
           {caseStudy.decisions.map((decision) => (
             <article
               key={t(decision.title, lang)}
-              className="border-border bg-surface rounded-card border p-6"
+              className="border-border bg-surface hover:border-border-strong rounded-card border p-6 transition-colors"
             >
               <h3 className="text-fg font-display text-lg font-semibold">
                 {t(decision.title, lang)}

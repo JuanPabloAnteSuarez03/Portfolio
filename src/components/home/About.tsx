@@ -24,7 +24,7 @@ export function About({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           </p>
         ))}
         <div className="pt-4">
-          <Button href={profile.cv} variant="secondary" external>
+          <Button href={profile.cv[lang]} variant="secondary" external>
             {dict.about.downloadCv} ↓
           </Button>
         </div>

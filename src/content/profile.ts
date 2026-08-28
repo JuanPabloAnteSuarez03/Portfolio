@@ -10,7 +10,10 @@ export const profile = {
   whatsapp: "https://wa.me/573162552802",
   github: "https://github.com/JuanPabloAnteSuarez03",
   location: { es: "Cali, Colombia", en: "Cali, Colombia" } satisfies L<string>,
-  cv: "/cv/CV-Juan-Pablo-Ante-Suarez.docx",
+  cv: {
+    es: "/cv/CV-Juan-Pablo-Ante-Suarez.docx",
+    en: "/cv/CV-Juan-Pablo-Ante-Suarez-EN.docx",
+  } satisfies L<string>,
 
   education: {
     school: "Universidad del Valle",
